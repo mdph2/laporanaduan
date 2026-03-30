@@ -14,11 +14,12 @@ body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#e
 
 :root{
   --bg:#ede9f7;--bg-2:#e6e1f3;--bg-3:#ddd8ed;--bg-4:#d4cee7;
-  --panel:#ffffff;--gold:#9a7320;--gold-2:#b8902e;--gold-3:#c9a84c;
-  --gold-faint:rgba(154,115,32,0.1);--border:rgba(154,115,32,0.22);
-  --border-soft:rgba(90,70,140,0.1);--border-purple:rgba(120,100,180,0.15);
+  --panel:#ffffff;
+  --gold:#4a2880;--gold-2:#5c3499;--gold-3:#7b52b8;
+  --gold-faint:rgba(74,40,128,0.1);--border:rgba(74,40,128,0.28);
+  --border-soft:rgba(90,70,140,0.12);--border-purple:rgba(120,100,180,0.18);
   --text:#1e1a2e;--text-2:#3d3555;--text-3:#5a5275;--muted:#8880a8;
-  --navy-dark:#0f1628;--navy-mid:#1a2340;--r:14px;--r-sm:8px;
+  --navy-dark:#1a0f36;--navy-mid:#2a1a50;--r:14px;--r-sm:8px;
   --panel-w:520px;
 }
 
@@ -37,6 +38,52 @@ body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#e
 .nav-links a{font-size:11px;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;font-family:'DM Mono',monospace;}
 .nav-links a:hover,.nav-links a.active{color:var(--gold);background:var(--gold-faint)}
 
+/* Nav right logo */
+.nav-right-logo{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.nav-right-logo-wrap{width:38px;height:38px;background:var(--panel);border:1.5px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px rgba(74,40,128,0.15);}
+.nav-right-logo-wrap img{width:30px;height:30px;object-fit:contain}
+.nav-right-logo-text{display:flex;flex-direction:column;align-items:flex-end;}
+.nav-right-logo-text strong{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;line-height:1.1}
+.nav-right-logo-text span{font-size:9.5px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.06em}
+
+/* ── HERO MDPH LOGO BADGE (top-right of hero) ── */
+.hero-mdph-badge{
+  position:absolute;top:36px;right:56px;z-index:10;
+  display:flex;align-items:center;gap:18px;
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(74,40,128,0.18);
+  border-radius:16px;
+  padding:16px 24px 16px 20px;
+  box-shadow:0 4px 28px rgba(74,40,128,0.13),0 1px 0 rgba(255,255,255,0.9) inset;
+}
+.hero-mdph-badge-logo{
+  width:72px;height:72px;
+  background:var(--panel);
+  border:1.5px solid rgba(74,40,128,0.15);
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;flex-shrink:0;
+  box-shadow:0 2px 12px rgba(74,40,128,0.12);
+}
+.hero-mdph-badge-logo img{width:60px;height:60px;object-fit:contain;}
+.hero-mdph-badge-text{display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
+.hero-mdph-badge-title{
+  font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.14em;
+  color:var(--gold);line-height:1;
+}
+.hero-mdph-badge-sub{
+  font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-3);line-height:1.4;
+}
+@media(max-width:900px){
+  .hero-mdph-badge{top:20px;right:20px;padding:12px 16px 12px 14px;gap:12px;}
+  .hero-mdph-badge-logo{width:52px;height:52px;border-radius:10px;}
+  .hero-mdph-badge-logo img{width:42px;height:42px;}
+  .hero-mdph-badge-title{font-size:20px;}
+  .hero-mdph-badge-sub{font-size:9.5px;}
+}
+
 /* ── DATA ENTRY BUTTON (fixed) ── */
 .fab-data{
   position:fixed;bottom:28px;right:28px;z-index:999;
@@ -45,11 +92,11 @@ body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#e
   background:linear-gradient(135deg,var(--gold),var(--gold-2));
   color:#fff;border:none;cursor:pointer;
   font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;
-  box-shadow:0 6px 28px rgba(154,115,32,.45);
+  box-shadow:0 6px 28px rgba(74,40,128,.45);
   transition:transform .2s,box-shadow .2s;
   letter-spacing:.04em;
 }
-.fab-data:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(154,115,32,.5)}
+.fab-data:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(74,40,128,.5)}
 .fab-data .fab-badge{
   background:rgba(255,255,255,0.25);
   border-radius:50px;padding:2px 8px;
@@ -145,7 +192,7 @@ body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#e
   transition:background .2s,border-color .2s;margin-bottom:22px;
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.btn-sample:hover{background:rgba(154,115,32,.18);border-color:var(--gold)}
+.btn-sample:hover{background:rgba(74,40,128,.18);border-color:var(--gold)}
 
 /* Repeater */
 .repeater-item{
@@ -201,13 +248,13 @@ body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#e
 /* ── REPORT STYLES ── */
 .hero{background:var(--bg-2);position:relative;overflow:hidden;padding:0;min-height:90vh;display:flex;flex-direction:column;}
 .hero-diagonal-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--bg) 0%,var(--bg) 52%,var(--bg-3) 52%,var(--bg-3) 100%);z-index:0;}
-.hero-gold-stripe{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,transparent 0%,transparent 51%,rgba(154,115,32,0.55) 51%,rgba(201,168,76,0.8) 52%,rgba(154,115,32,0.4) 53%,transparent 53.5%,transparent 56%,rgba(154,115,32,0.06) 56%,rgba(154,115,32,0.02) 59%,transparent 64%);z-index:1;pointer-events:none;}
+.hero-gold-stripe{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,transparent 0%,transparent 51%,rgba(74,40,128,0.55) 51%,rgba(123,82,184,0.8) 52%,rgba(74,40,128,0.4) 53%,transparent 53.5%,transparent 56%,rgba(74,40,128,0.06) 56%,rgba(74,40,128,0.02) 59%,transparent 64%);z-index:1;pointer-events:none;}
 .hero-noise{position:absolute;inset:0;z-index:2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;}
 .hero-bottom-fade{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,var(--bg));z-index:3;pointer-events:none;}
 .hero-inner{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:4;display:grid;grid-template-columns:1fr 380px;gap:0;align-items:stretch;flex:1;padding:80px 56px 100px;}
 .hero-left{display:flex;flex-direction:column;justify-content:center;padding-right:60px}
 .hero-eyebrow{display:flex;align-items:center;gap:16px;margin-bottom:32px}
-.hero-chip{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(154,115,32,0.1);border:1px solid var(--border);border-radius:100px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(74,40,128,0.1);border:1px solid var(--border);border-radius:100px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
 .hero-chip-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:blink 2.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .hero-year-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
@@ -221,7 +268,7 @@ body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#e
 .hero-photo-inner{width:100%;border-radius:0;overflow:hidden;position:relative}
 .hero-photo-inner img{width:100%;display:block;max-height:520px;object-fit:cover;object-position:center top;filter:grayscale(8%) contrast(1.05)}
 .hero-photo-inner::before{content:'';position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(to top,rgba(237,233,247,.9) 0%,transparent 100%);z-index:2;pointer-events:none;}
-.hero-photo-inner::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),rgba(154,115,32,0.3),transparent);z-index:3;}
+.hero-photo-inner::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),rgba(74,40,128,0.3),transparent);z-index:3;}
 .hero-photo-badge{position:absolute;bottom:0;left:0;right:0;z-index:4;padding:20px 24px;background:rgba(237,233,247,0.95);border-top:1px solid var(--border-purple);}
 .hero-photo-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--text);margin-bottom:3px}
 .hero-photo-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
@@ -231,6 +278,15 @@ body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#e
 .hero-stat-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .hero-stat-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em;color:var(--gold-2)}
 .hero-stat-val.cream{color:var(--text)}
+
+/* Auto-pill live indicator */
+.hero-stat-cell .auto-badge{
+  display:inline-block;font-family:'DM Mono',monospace;font-size:8px;
+  letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(74,40,128,.1);color:var(--gold);
+  border:1px solid rgba(74,40,128,.2);border-radius:4px;
+  padding:1px 5px;margin-left:6px;vertical-align:middle;
+}
 
 .wrap{max-width:1200px;margin:0 auto;padding:72px 48px 96px}
 section{margin-bottom:80px;scroll-margin-top:72px}
@@ -243,14 +299,14 @@ section{margin-bottom:80px;scroll-margin-top:72px}
 .card-body{padding:28px}
 .badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.04em;font-family:'DM Mono',monospace}
 .badge-ok{background:rgba(50,130,80,.1);color:#1f7a42;border:1px solid rgba(50,130,80,.2)}
-.badge-wip{background:rgba(154,115,32,.1);color:var(--gold);border:1px solid rgba(154,115,32,.2)}
+.badge-wip{background:rgba(74,40,128,.1);color:var(--gold);border:1px solid rgba(74,40,128,.2)}
 
 /* ALUAN */
 .aluan-poster{background:var(--panel);border-radius:16px;overflow:hidden;box-shadow:0 8px 48px rgba(60,40,120,0.14);border:1px solid var(--border-purple);position:relative;}
-.aluan-banner{background:linear-gradient(135deg,#c8b87a,#d4c88a,#b8a060,#c8b87a);padding:13px 36px;display:flex;align-items:center;justify-content:center;}
-.aluan-banner-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(30,20,10,0.75);font-weight:500;}
-.aluan-body{display:grid;grid-template-columns:1fr 300px;min-height:560px;position:relative;}
-.aluan-text{padding:48px 40px 48px 48px;position:relative;z-index:2;}
+.aluan-banner{background:linear-gradient(135deg,#5c3499,#7b52b8,#4a2880,#6a44a8);padding:13px 36px;display:flex;align-items:center;justify-content:center;}
+.aluan-banner-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,0.85);font-weight:500;}
+.aluan-body{display:grid;grid-template-columns:260px 1fr;min-height:560px;position:relative;}
+.aluan-text{padding:48px 48px 48px 40px;position:relative;z-index:2;}
 .aluan-heading-block{margin-bottom:24px}
 .aluan-label{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block;}
 .aluan-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,4.5vw,54px);letter-spacing:.04em;line-height:.95;color:var(--text);margin-bottom:8px;}
@@ -259,10 +315,10 @@ section{margin-bottom:80px;scroll-margin-top:72px}
 .aluan-salutation{font-size:14px;font-weight:600;color:var(--text);margin-bottom:18px;letter-spacing:.01em;}
 .aluan-para{font-size:13.2px;line-height:1.9;color:var(--text-3);margin-bottom:12px;font-weight:300;}
 .aluan-closing-txt{font-size:13px;color:var(--muted);font-style:italic;margin-top:20px;}
-.aluan-photo-col{position:relative;overflow:hidden;background:linear-gradient(to bottom,var(--bg-2) 0%,var(--bg-3) 100%);}
-.aluan-photo-col img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(5%) contrast(1.04) brightness(.98);mask-image:linear-gradient(to bottom,black 0%,black 65%,transparent 95%);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 65%,transparent 95%);}
+.aluan-photo-col{position:relative;overflow:hidden;background:var(--panel);}
+.aluan-photo-col img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(5%) contrast(1.04) brightness(.98);mask-image:linear-gradient(to right,black 0%,black 55%,transparent 95%),linear-gradient(to bottom,transparent 0%,black 5%,black 80%,transparent 100%);-webkit-mask-image:linear-gradient(to right,black 0%,black 55%,transparent 95%);mask-composite:intersect;-webkit-mask-composite:destination-in;}
 .aluan-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--muted);background:var(--bg-2);}
-.aluan-footer{position:relative;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy-mid) 50%,#0d1c38 100%);padding:28px 48px 32px;display:grid;grid-template-columns:1fr 300px;align-items:center;overflow:hidden;}
+.aluan-footer{position:relative;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy-mid) 50%,#1a0f36 100%);padding:28px 48px 32px;display:grid;grid-template-columns:260px 1fr;align-items:center;overflow:hidden;}
 .aluan-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold-3),var(--gold),var(--gold-3));}
 .aluan-footer-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.1em;color:#fff;margin-bottom:6px;}
 .aluan-footer-pos{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-3);}
@@ -270,7 +326,7 @@ section{margin-bottom:80px;scroll-margin-top:72px}
 /* VISI MISI */
 .vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .vm-dark{background:linear-gradient(135deg,var(--bg-2),var(--bg-3));border:1px solid var(--border-purple);border-radius:var(--r);padding:44px 46px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(90,70,140,0.07);}
-.vm-dark::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,rgba(154,115,32,0.4),var(--gold),rgba(154,115,32,0.4))}
+.vm-dark::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,rgba(74,40,128,0.4),var(--gold),rgba(74,40,128,0.4))}
 .vm-dark .vm-icon{width:42px;height:42px;border-radius:10px;background:var(--gold-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
 .vm-dark h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.06em;color:var(--text);margin-bottom:18px}
 .vm-dark p{font-size:14px;color:var(--text-3);line-height:1.9;font-weight:300}
@@ -297,7 +353,7 @@ table.tbl th{background:var(--bg-2);color:var(--gold);padding:12px 16px;text-ali
 table.tbl td{padding:11px 16px;border-bottom:1px solid rgba(90,70,140,0.06);vertical-align:middle;background:var(--panel);color:var(--text-2)}
 table.tbl tr:nth-child(even) td{background:rgba(90,70,140,0.02)}
 table.tbl tr:hover td{background:var(--gold-faint)}
-table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight:600;color:var(--gold)}
+table.tbl tfoot td{padding:13px 16px;background:rgba(74,40,128,.08);font-weight:600;color:var(--gold)}
 
 /* KPI */
 .kpi-prev-item{background:var(--bg-2);border:1px solid var(--border-soft);border-radius:12px;padding:26px 28px;margin-bottom:12px;position:relative;overflow:hidden;}
@@ -307,7 +363,7 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
 .kpi-prev-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.05em}
 .kpi-track{height:6px;border-radius:99px;background:rgba(90,70,140,0.1);position:relative;overflow:visible;margin-bottom:10px}
 .kpi-fill{height:100%;border-radius:99px;transition:width .6s}
-.kpi-target-line{position:absolute;top:-4px;height:14px;width:2px;background:rgba(154,115,32,0.5);border-radius:1px}
+.kpi-target-line{position:absolute;top:-4px;height:14px;width:2px;background:rgba(74,40,128,0.5);border-radius:1px}
 .kpi-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
 
 /* STATS PREVIEW */
@@ -350,7 +406,6 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
   transition:background .2s,transform .15s;
 }
 .img-del:hover{background:rgba(200,30,30,.85);transform:scale(1.1)}
-/* editable meta below thumb */
 .img-meta-edit{
   padding:14px 16px 16px;border-top:1px solid var(--border-soft);
   background:var(--panel);display:flex;flex-direction:column;gap:8px;
@@ -373,7 +428,6 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
   transition:border-color .2s,background .2s;
 }
 .img-meta-edit .img-caption-input:focus{border-color:var(--gold);background:var(--panel)}
-/* print version of image card */
 .img-print-meta{display:none;padding:10px 14px;border-top:1px solid var(--border-soft);background:var(--panel)}
 .img-print-meta strong{display:block;font-size:12px;font-weight:700;color:var(--gold-2);margin-bottom:3px}
 .img-print-meta span{font-size:11px;color:var(--text-3)}
@@ -405,20 +459,96 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
 /* Empty state */
 .empty-state{text-align:center;padding:40px;color:var(--muted);font-size:13px;font-family:'DM Mono',monospace;letter-spacing:.04em;border:1px dashed var(--border);border-radius:12px;margin:20px 0}
 
-/* PRINT */
+/* ═══════════════════════════════════════
+   PRINT STYLES
+═══════════════════════════════════════ */
 @media print{
   .no-print,.nav,.fab-data,.panel-overlay,.slide-panel{display:none!important}
   body{background:white;color:#111;font-size:12px}
   .wrap{padding:0;max-width:100%}
   section{margin-bottom:28px;page-break-inside:avoid}
-  .hero{min-height:auto;padding:32px 28px 60px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .hero{
+    min-height:auto;padding:32px 28px 60px;
+    print-color-adjust:exact;-webkit-print-color-adjust:exact;
+    position:relative;overflow:visible;
+  }
   .fade{opacity:1!important;transform:none!important}
+
+  /* ── FORCE BADGE TO PRINT ── */
+  .hero-mdph-badge{
+    position:absolute !important;
+    top:28px !important;
+    right:40px !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:16px !important;
+    /* Solid background — no backdrop-filter in print */
+    background:#ffffff !important;
+    border:1.5px solid #c0b0e0 !important;
+    border-radius:14px !important;
+    padding:14px 20px 14px 16px !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    print-color-adjust:exact !important;
+    -webkit-print-color-adjust:exact !important;
+    z-index:100 !important;
+  }
+  .hero-mdph-badge-logo{
+    width:64px !important;
+    height:64px !important;
+    background:#ffffff !important;
+    border:1.5px solid #c0b0e0 !important;
+    border-radius:12px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    overflow:hidden !important;
+    flex-shrink:0 !important;
+    print-color-adjust:exact !important;
+    -webkit-print-color-adjust:exact !important;
+  }
+  .hero-mdph-badge-logo img{
+    width:54px !important;
+    height:54px !important;
+    object-fit:contain !important;
+    display:block !important;
+    print-color-adjust:exact !important;
+    -webkit-print-color-adjust:exact !important;
+  }
+  .hero-mdph-badge-title{
+    font-family:'Bebas Neue',sans-serif !important;
+    font-size:26px !important;
+    letter-spacing:.14em !important;
+    color:#4a2880 !important;
+    line-height:1 !important;
+    display:block !important;
+    print-color-adjust:exact !important;
+    -webkit-print-color-adjust:exact !important;
+  }
+  .hero-mdph-badge-sub{
+    font-size:10px !important;
+    letter-spacing:.1em !important;
+    text-transform:uppercase !important;
+    color:#5a5275 !important;
+    line-height:1.4 !important;
+    display:block !important;
+    print-color-adjust:exact !important;
+    -webkit-print-color-adjust:exact !important;
+  }
+  .hero-mdph-badge-text{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:4px !important;
+  }
 }
 
 /* RESPONSIVE */
 @media(max-width:900px){
   .nav{padding:0 18px}
   .nav-links{display:none}
+  .nav-right-logo-text{display:none}
   .hero-inner{grid-template-columns:1fr;padding:60px 28px 80px}
   .hero-right{display:none}
   .hero-stats-strip{grid-template-columns:1fr 1fr}
@@ -471,6 +601,16 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
   <div class="hero-gold-stripe"></div>
   <div class="hero-noise"></div>
   <div class="hero-bottom-fade"></div>
+  <!-- MDPH LOGO BADGE -->
+  <div class="hero-mdph-badge">
+    <div class="hero-mdph-badge-logo">
+      <img src="https://lh3.googleusercontent.com/d/1gkq2KUDeSahQT9db8KgIs6HtDotaeao1" alt="MDPH Logo">
+    </div>
+    <div class="hero-mdph-badge-text">
+      <div class="hero-mdph-badge-title">MDPH</div>
+      <div class="hero-mdph-badge-sub">Majlis Daerah<br>Pengkalan Hulu</div>
+    </div>
+  </div>
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-eyebrow">
@@ -482,7 +622,6 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
       <div class="hero-rule"></div>
       <p class="hero-desc">Dokumentasi pencapaian, projek pembangunan infrastruktur serta laporan prestasi Jabatan Kejuruteraan MDPH bagi tahun <span class="sync-tahun">2025</span>.</p>
     </div>
-
   </div>
   <div class="hero-stats-strip">
     <div class="hero-stat-cell">
@@ -490,15 +629,15 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
       <div class="hero-stat-val"><span class="sync-tahun">2025</span></div>
     </div>
     <div class="hero-stat-cell">
-      <div class="hero-stat-lbl">Jumlah Projek</div>
+      <div class="hero-stat-lbl">Jumlah Projek <span class="auto-badge">AUTO</span></div>
       <div class="hero-stat-val cream" id="pill-projek">—</div>
     </div>
     <div class="hero-stat-cell">
-      <div class="hero-stat-lbl">Perbelanjaan</div>
+      <div class="hero-stat-lbl">Perbelanjaan <span class="auto-badge">AUTO</span></div>
       <div class="hero-stat-val cream" id="pill-belanja">—</div>
     </div>
     <div class="hero-stat-cell">
-      <div class="hero-stat-lbl">Kadar Siap</div>
+      <div class="hero-stat-lbl">Kadar Siap <span class="auto-badge">AUTO</span></div>
       <div class="hero-stat-val cream" id="pill-kadar">—</div>
     </div>
   </div>
@@ -515,6 +654,9 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
     <div class="aluan-poster">
       <div class="aluan-banner"><span class="aluan-banner-text">Laporan Tahunan <span class="sync-tahun">2025</span></span></div>
       <div class="aluan-body">
+        <div class="aluan-photo-col" id="aluan-photo-col-left">
+          <img src="https://lh3.googleusercontent.com/d/1NE_7MZ_MQhDdcGoqmTTtdSF8zUg372Bh" alt="Ketua Jabatan" id="aluan-photo-img-left">
+        </div>
         <div class="aluan-text">
           <div class="aluan-heading-block">
             <span class="aluan-label">Perutusan</span>
@@ -527,20 +669,12 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
             <p class="aluan-para">Syukur ke hadrat Allah SWT, Jabatan Kejuruteraan Majlis Daerah Pengkalan Hulu telah berjaya mengharungi tahun 2025 dengan pelbagai pencapaian serta cabaran yang ditangani dengan komitmen dan dedikasi.</p>
             <p class="aluan-para">Sepanjang tahun ini, jabatan terus memainkan peranan penting dalam merancang, melaksana dan memantau projek pembangunan infrastruktur serta penyelenggaraan kemudahan awam bagi memastikan persekitaran yang selamat, kondusif dan mampan.</p>
             <p class="aluan-para">Fokus utama meliputi pelaksanaan projek pembangunan, penyelenggaraan jalan, sistem perparitan, lampu jalan serta kemudahan awam lain, di samping memastikan setiap projek memenuhi spesifikasi, tempoh masa dan kualiti yang ditetapkan.</p>
-			<p class="aluan-para">Jabatan turut memperkukuhkan tadbir urus dan pengurusan projek melalui penambahbaikan sistem kerja serta peningkatan kecekapan sumber manusia.</p>
-			<p class="aluan-para">Walaupun berdepan cabaran seperti kekangan peruntukan, faktor cuaca dan peningkatan kos, jabatan terus komited melaksanakan setiap projek demi kepentingan rakyat.</p>
-			<p class="aluan-para">Setinggi-tinggi penghargaan kepada pihak pengurusan, agensi kerajaan, kontraktor serta seluruh warga jabatan atas kerjasama dan dedikasi yang diberikan.</p>
-			<p class="aluan-para">Semoga Jabatan Kejuruteraan terus komited dalam memberikan perkhidmatan yang berkualiti, cekap dan berintegriti.</p>
-			
+            <p class="aluan-para">Jabatan turut memperkukuhkan tadbir urus dan pengurusan projek melalui penambahbaikan sistem kerja serta peningkatan kecekapan sumber manusia.</p>
+            <p class="aluan-para">Walaupun berdepan cabaran seperti kekangan peruntukan, faktor cuaca dan peningkatan kos, jabatan terus komited melaksanakan setiap projek demi kepentingan rakyat.</p>
+            <p class="aluan-para">Setinggi-tinggi penghargaan kepada pihak pengurusan, agensi kerajaan, kontraktor serta seluruh warga jabatan atas kerjasama dan dedikasi yang diberikan.</p>
+            <p class="aluan-para">Semoga Jabatan Kejuruteraan terus komited dalam memberikan perkhidmatan yang berkualiti, cekap dan berintegriti.</p>
           </div>
           <div class="aluan-closing-txt">Sekian, terima kasih.</div>
-        </div>
-        <div class="aluan-photo-col" id="aluan-photo-col">
-          <img src="https://lh3.googleusercontent.com/d/1NE_7MZ_MQhDdcGoqmTTtdSF8zUg372Bh" alt="Ketua Jabatan" id="aluan-photo-img2" onerror="this.style.display='none';document.getElementById('aluan-ph-placeholder').style.display='flex'">
-          <div class="aluan-photo-placeholder" id="aluan-ph-placeholder" style="display:none">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span style="font-size:11px;font-family:'DM Mono',monospace;text-align:center;padding:0 20px">Muat naik gambar ketua jabatan</span>
-          </div>
         </div>
       </div>
       <div class="aluan-footer">
@@ -674,22 +808,16 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
   <p>© <span class="sync-tahun-next">2026</span> MDPH · LAPORAN TAHUNAN · SULIT RASMI</p>
 </footer>
 
-<!-- ═══════════════════════════════════════════
-     FLOATING BUTTON
-═══════════════════════════════════════════ -->
+<!-- FAB -->
 <button class="fab-data no-print" onclick="openPanel()">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
   Isi Data Laporan
   <span class="fab-badge" id="fab-pct">0%</span>
 </button>
 
-<!-- ═══════════════════════════════════════════
-     SLIDE PANEL
-═══════════════════════════════════════════ -->
+<!-- SLIDE PANEL -->
 <div class="panel-overlay no-print" id="panel-overlay" onclick="closePanel()"></div>
 <div class="slide-panel no-print" id="slide-panel">
-  
-  <!-- Panel Header -->
   <div class="panel-hdr">
     <div class="panel-hdr-top">
       <div>
@@ -717,10 +845,9 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight
     </div>
   </div>
 
-  <!-- Panel Body -->
   <div class="panel-body">
 
-    <!-- ── TAB: MAKLUMAT ── -->
+    <!-- TAB: MAKLUMAT -->
     <div class="tab-pane active" id="tab-maklumat">
       <button class="btn-sample" onclick="fillSampleAll()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
@@ -758,7 +885,7 @@ Memperbaki dan menaik taraf kemudahan infrastruktur serta pembangunan masyarakat
       </div>
     </div>
 
-    <!-- ── TAB: ALUAN ── -->
+    <!-- TAB: ALUAN -->
     <div class="tab-pane" id="tab-aluan">
       <div class="psec">Kata Aluan Ketua Jabatan</div>
       <div class="field"><label>Salam Pembuka</label><input type="text" id="f-salut" value="Assalamualaikum Warahmatullahi Wabarakatuh dan Salam Sejahtera," oninput="renderAluan()"></div>
@@ -774,7 +901,7 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
       <div style="text-align:right"><button class="btn-apply" onclick="switchTab('ringkasan')">Seterusnya: Pencapaian →</button></div>
     </div>
 
-    <!-- ── TAB: RINGKASAN ── -->
+    <!-- TAB: RINGKASAN -->
     <div class="tab-pane" id="tab-ringkasan">
       <div class="psec">Petunjuk Pencapaian</div>
       <p style="font-size:13px;color:var(--muted);margin-bottom:18px;font-family:'DM Mono',monospace;letter-spacing:.03em">Tambah angka-angka pencapaian utama jabatan. Nilai pertama akan dipaparkan di banner utama.</p>
@@ -783,7 +910,7 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
       <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('projek')">Seterusnya: Projek →</button></div>
     </div>
 
-    <!-- ── TAB: PROJEK ── -->
+    <!-- TAB: PROJEK -->
     <div class="tab-pane" id="tab-projek">
       <div class="psec">Senarai Projek Utama</div>
       <div id="projek-repeater"></div>
@@ -791,7 +918,7 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
       <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('kewangan')">Seterusnya: Kewangan →</button></div>
     </div>
 
-    <!-- ── TAB: KEWANGAN ── -->
+    <!-- TAB: KEWANGAN -->
     <div class="tab-pane" id="tab-kewangan">
       <div class="psec">Laporan Kewangan</div>
       <div id="kewangan-repeater"></div>
@@ -799,7 +926,7 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
       <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('kpi')">Seterusnya: KPI →</button></div>
     </div>
 
-    <!-- ── TAB: KPI ── -->
+    <!-- TAB: KPI -->
     <div class="tab-pane" id="tab-kpi">
       <div class="psec">Petunjuk Prestasi Utama (KPI)</div>
       <div id="kpi-repeater"></div>
@@ -807,7 +934,7 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
       <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('timeline')">Seterusnya: Suku Tahun →</button></div>
     </div>
 
-    <!-- ── TAB: TIMELINE ── -->
+    <!-- TAB: TIMELINE -->
     <div class="tab-pane" id="tab-timeline">
       <div class="psec">Pencapaian Suku Tahunan</div>
       <div id="tl-repeater"></div>
@@ -815,7 +942,7 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
       <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('pelan')">Seterusnya: Pelan →</button></div>
     </div>
 
-    <!-- ── TAB: PELAN ── -->
+    <!-- TAB: PELAN -->
     <div class="tab-pane" id="tab-pelan">
       <div class="psec">Pelan Strategik Tahun Hadapan</div>
       <div class="field"><label>Jumlah Peruntukan Keseluruhan</label><input type="text" id="f-pelan-total" placeholder="cth: RM 35 Juta" oninput="renderPelan()"></div>
@@ -826,7 +953,6 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
 
   </div>
 
-  <!-- Panel Footer -->
   <div class="panel-footer">
     <button class="btn-apply" onclick="closePanel();toast('Data disimpan ✓')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>
@@ -843,7 +969,7 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
    DATA STORES
 ═══════════════════════════════════════ */
 let statsData=[], projekData=[], kewanganData=[], kpiData=[], tlData=[], pelanData=[], imgData=[];
-const PALETTE=["#9a7320","#b8902e","#7a5c20","#1f7a42","#3a6080","#7a5c3a","#5a6a8a"];
+const PALETTE=["#4a2880","#5c3499","#7b52b8","#1f7a42","#3a6080","#5a3a7a","#5a6a8a"];
 const catOpts=["Jalan Raya","Saliran","Bangunan","Kemudahan Awam","Lain-lain"];
 
 /* ═══════════════════════════════════════
@@ -921,8 +1047,6 @@ function syncTahun(val){
 function syncName(){
   const name=document.getElementById("f-nama").value;
   const pos=document.getElementById("f-jawatan").value;
-  document.getElementById("hero-name-disp").textContent=name||"Nama Ketua Jabatan";
-  document.getElementById("hero-pos-disp").textContent=(pos||"Ketua Jabatan Kejuruteraan")+" · MDPH";
   document.getElementById("aluan-name-disp").textContent=name||"Nama Ketua Jabatan";
   document.getElementById("aluan-pos-disp").textContent=pos||"Ketua Jabatan Kejuruteraan";
   updateProgress();
@@ -931,14 +1055,8 @@ function handleAluanImg(files){
   if(!files[0])return;
   const r=new FileReader();
   r.onload=ev=>{
-    ["hero-photo-img","aluan-photo-img2"].forEach(id=>{
-      const img=document.getElementById(id);
-      if(img){img.src=ev.target.result;img.style.display="block";}
-    });
-    const ph=document.getElementById("aluan-ph-placeholder");
-    if(ph)ph.style.display="none";
-    const pi=document.getElementById("hero-photo-inner");
-    if(pi)pi.style.display="";
+    const img=document.getElementById("aluan-photo-img-left");
+    if(img){img.src=ev.target.result;}
   };
   r.readAsDataURL(files[0]);
 }
@@ -965,6 +1083,42 @@ function renderAluan(){
 }
 
 /* ═══════════════════════════════════════
+   AUTO HERO PILLS
+═══════════════════════════════════════ */
+function updateHeroPills(){
+  if(projekData.length > 0){
+    document.getElementById("pill-projek").textContent = projekData.length + " Projek";
+  } else {
+    document.getElementById("pill-projek").textContent = "—";
+  }
+
+  let totalSpent = 0, hasSpent = false;
+  kewanganData.forEach(k => {
+    const s = parseFloat((k.spent||"").replace(/,/g,"")) || 0;
+    if(s > 0){ totalSpent += s; hasSpent = true; }
+  });
+  if(hasSpent){
+    const juta = totalSpent / 1000000;
+    if(juta >= 1){
+      const formatted = juta % 1 === 0 ? juta.toFixed(0) : juta.toFixed(1);
+      document.getElementById("pill-belanja").textContent = "RM " + formatted + "J";
+    } else {
+      document.getElementById("pill-belanja").textContent = "RM " + totalSpent.toLocaleString();
+    }
+  } else {
+    document.getElementById("pill-belanja").textContent = "—";
+  }
+
+  if(projekData.length > 0){
+    const siap = projekData.filter(p => p.status === "Siap").length;
+    const pct = Math.round(siap / projekData.length * 100);
+    document.getElementById("pill-kadar").textContent = pct + "%";
+  } else {
+    document.getElementById("pill-kadar").textContent = "—";
+  }
+}
+
+/* ═══════════════════════════════════════
    STATS
 ═══════════════════════════════════════ */
 function addStat(val="",lbl=""){
@@ -984,14 +1138,13 @@ function renderStatsRepeater(){
 }
 function renderStatsPreview(){
   const w=document.getElementById("stats-preview");
-  if(!statsData.length){w.innerHTML='<div class="empty-state">Belum ada data. Buka <strong>Panel Isi Data</strong> → tab <strong>Pencapaian</strong>.</div>';w.style.gridTemplateColumns="1fr";return}
+  if(!statsData.length){
+    w.innerHTML='<div class="empty-state">Belum ada data. Buka <strong>Panel Isi Data</strong> → tab <strong>Pencapaian</strong>.</div>';
+    w.style.gridTemplateColumns="1fr";
+    return;
+  }
   w.style.gridTemplateColumns=`repeat(${Math.min(statsData.length,4)},1fr)`;
   w.innerHTML=statsData.map(s=>`<div class="stat-prev"><div class="stat-prev-val">${s.val||"—"}</div><div class="stat-prev-lbl">${s.lbl||"Label"}</div></div>`).join("");
-  // Update hero pills
-  const find=keys=>{for(const k of keys){const s=statsData.find(x=>x.lbl.toLowerCase().includes(k));if(s)return s.val}return"—"};
-  document.getElementById("pill-projek").textContent=find(["projek","bilangan"]);
-  document.getElementById("pill-belanja").textContent=find(["belanja","perbelanj","kos","peruntukan"]);
-  document.getElementById("pill-kadar").textContent=find(["kadar","siap","penyiap"]);
 }
 
 /* ═══════════════════════════════════════
@@ -1020,9 +1173,12 @@ function renderProjekRepeater(){
 }
 function renderProjekPreview(){
   const tb=document.getElementById("projek-tbody");
-  if(!projekData.length){tb.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada projek. Buka Panel → tab Projek.</td></tr>`;return}
+  if(!projekData.length){tb.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada projek. Buka Panel → tab Projek.</td></tr>`;
+    updateHeroPills();
+    return;
+  }
   tb.innerHTML=projekData.map((p,i)=>{
-    const ok=p.status==="Siap",c=ok?"#1f7a42":"#9a7320";
+    const ok=p.status==="Siap",c=ok?"#1f7a42":"#4a2880";
     return`<tr>
       <td style="text-align:center;opacity:.3;font-size:12px;font-family:'DM Mono',monospace">${i+1}</td>
       <td style="font-weight:600;color:var(--text)">${p.name||"—"}</td>
@@ -1036,6 +1192,7 @@ function renderProjekPreview(){
       </div></td>
     </tr>`;
   }).join("");
+  updateHeroPills();
 }
 
 /* ═══════════════════════════════════════
@@ -1059,7 +1216,12 @@ function renderKewanganRepeater(){
 }
 function renderKewanganPreview(){
   const tb=document.getElementById("kewangan-tbody"),tf=document.getElementById("kewangan-tfoot");
-  if(!kewanganData.length){tb.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada data. Buka Panel → tab Kewangan.</td></tr>`;tf.innerHTML="";return}
+  if(!kewanganData.length){
+    tb.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada data. Buka Panel → tab Kewangan.</td></tr>`;
+    tf.innerHTML="";
+    updateHeroPills();
+    return;
+  }
   let tA=0,tS=0;
   tb.innerHTML=kewanganData.map((k,i)=>{
     const a=parseFloat(k.alloc.replace(/,/g,""))||0,s=parseFloat(k.spent.replace(/,/g,""))||0,baki=a-s,pct=a>0?Math.round(s/a*100):0;
@@ -1078,12 +1240,13 @@ function renderKewanganPreview(){
   }).join("");
   const tP=tA>0?Math.round(tS/tA*100):0;
   tf.innerHTML=`<tr><td style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600">JUMLAH</td><td style="text-align:right;font-family:'DM Mono',monospace">RM ${tA.toLocaleString()}</td><td style="text-align:right;font-family:'DM Mono',monospace">RM ${tS.toLocaleString()}</td><td style="text-align:right;font-family:'DM Mono',monospace">RM ${(tA-tS).toLocaleString()}</td><td colspan="2" style="text-align:right;color:var(--gold);font-family:'DM Mono',monospace">${tP}% Digunakan</td></tr>`;
+  updateHeroPills();
 }
 
 /* ═══════════════════════════════════════
    KPI
 ═══════════════════════════════════════ */
-function addKPI(label="",target=80,actual=0,color="#9a7320"){
+function addKPI(label="",target=80,actual=0,color="#4a2880"){
   kpiData.push({label,target,actual,color});
   renderKPIRepeater();renderKPIPreview();updateProgress();
 }
@@ -1104,7 +1267,7 @@ function renderKPIPreview(){
   const l=document.getElementById("kpi-list");
   if(!kpiData.length){l.innerHTML='<div class="empty-state">Belum ada KPI. Buka Panel → tab KPI.</div>';return}
   l.innerHTML=kpiData.map(k=>{
-    const ok=k.actual>=k.target,col=k.color||(ok?"#1f7a42":"#9a7320"),diff=k.actual-k.target;
+    const ok=k.actual>=k.target,col=k.color||(ok?"#1f7a42":"#4a2880"),diff=k.actual-k.target;
     return`<div class="kpi-prev-item">
       <div class="kpi-prev-top"><span class="kpi-prev-label">${k.label||"KPI"}</span><span class="kpi-prev-val" style="color:${col}">${k.actual}%</span></div>
       <div class="kpi-track">
@@ -1180,7 +1343,7 @@ function renderPelan(){
 }
 
 /* ═══════════════════════════════════════
-   IMAGES (drag-drop in report)
+   IMAGES
 ═══════════════════════════════════════ */
 const iz=document.querySelector(".img-zone");
 if(iz){
@@ -1240,12 +1403,10 @@ function renderImgGrid(){
    SAMPLE DATA FILL
 ═══════════════════════════════════════ */
 function fillSampleAll(){
-  // Maklumat
   document.getElementById("f-tahun").value="2025"; syncTahun("2025");
-  document.getElementById("f-nama").value="Mohd. Azizudin Bin Ismail"; 
+  document.getElementById("f-nama").value="Mohd. Azizudin Bin Ismail";
   document.getElementById("f-jawatan").value="Ketua Jabatan Kejuruteraan"; syncName();
 
-  // Aluan
   document.getElementById("f-salut").value="Assalamualaikum Warahmatullahi Wabarakatuh dan Salam Sejahtera,";
   document.getElementById("f-aluan-body").value=`Alhamdulillah, Jabatan Kejuruteraan Majlis Daerah Pengkalan Hulu telah berjaya melaksanakan pelbagai projek dan tanggungjawab sepanjang tahun 2025 dengan baik, terancang serta berkesan.
 
@@ -1256,12 +1417,10 @@ Komitmen serta kerjasama erat daripada semua pihak telah membolehkan setiap pera
 Saya ingin merakamkan setinggi-tinggi penghargaan kepada seluruh warga jabatan atas dedikasi dan komitmen yang ditunjukkan sepanjang tahun ini.`;
   renderAluan();
 
-  // Stats
   statsData=[];
   [["47","Jumlah Projek"],["RM 28.5J","Jumlah Perbelanjaan"],["89%","Kadar Siap"],["124","Aduan Diselesaikan"]].forEach(([v,l])=>statsData.push({val:v,lbl:l}));
   renderStatsRepeater();renderStatsPreview();
 
-  // Projek
   projekData=[];
   [
     ["Menaik Taraf Jalan Kg. Baru","Jalan Raya","1,250,000","S1","Siap",100],
@@ -1273,17 +1432,14 @@ Saya ingin merakamkan setinggi-tinggi penghargaan kepada seluruh warga jabatan a
   ].forEach(r=>projekData.push({name:r[0],cat:r[1],cost:r[2],quarter:r[3],status:r[4],prog:r[5]}));
   renderProjekRepeater();renderProjekPreview();
 
-  // Kewangan
   kewanganData=[];
   [["Jalan Raya","12,500,000","11,200,000"],["Saliran","4,200,000","3,980,000"],["Bangunan","2,800,000","2,650,000"],["Kemudahan Awam","5,000,000","4,200,000"],["Penyelenggaraan","3,000,000","2,900,000"]].forEach(r=>kewanganData.push({cat:r[0],alloc:r[1],spent:r[2]}));
   renderKewanganRepeater();renderKewanganPreview();
 
-  // KPI
   kpiData=[];
-  [["Kadar Penyiapan Projek",90,89,"#9a7320"],["Penyelesaian Aduan Orang Ramai",95,97,"#1f7a42"],["Penggunaan Peruntukan",85,87,"#3a6080"],["Kepuasan Pelanggan",80,76,"#b8902e"]].forEach(r=>kpiData.push({label:r[0],target:r[1],actual:r[2],color:r[3]}));
+  [["Kadar Penyiapan Projek",90,89,"#4a2880"],["Penyelesaian Aduan Orang Ramai",95,97,"#1f7a42"],["Penggunaan Peruntukan",85,87,"#3a6080"],["Kepuasan Pelanggan",80,76,"#5c3499"]].forEach(r=>kpiData.push({label:r[0],target:r[1],actual:r[2],color:r[3]}));
   renderKPIRepeater();renderKPIPreview();
 
-  // Timeline
   tlData=[];
   [
     ["S1 (Jan–Mac)","Fasa Perancangan","Penyediaan dokumen tender, lukisan teknikal dan jadual pelaksanaan projek. Sebanyak 12 projek telah diluluskan peruntukan."],
@@ -1293,7 +1449,6 @@ Saya ingin merakamkan setinggi-tinggi penghargaan kepada seluruh warga jabatan a
   ].forEach(r=>tlData.push({q:r[0],title:r[1],desc:r[2]}));
   renderTLRepeater();renderTLPreview();
 
-  // Pelan
   document.getElementById("f-pelan-total").value="RM 32 Juta";
   pelanData=[];
   [
