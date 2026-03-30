@@ -1,4 +1,4 @@
-\<!doctype html>
+<!doctype html>
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
@@ -977,17 +977,24 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
       <div class="psec">Pencapaian Suku Tahunan</div>
       <div id="tl-repeater"></div>
       <button class="btn-add" onclick="addTL()">+ Tambah Suku Tahun</button>
-      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="closePanel();toast('Semua data disimpan ✓')">✓ Selesai &amp; Tutup Panel</button></div>
+      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="saveToStorage();closePanel();toast('✓ Semua data disimpan ke peranti')">✓ Selesai &amp; Tutup Panel</button></div>
     </div>
 
   </div>
 
   <div class="panel-footer">
-    <button class="btn-apply" onclick="closePanel();toast('Data disimpan ✓')">
+    <button class="btn-apply" onclick="saveToStorage();closePanel();toast('✓ Data disimpan ke peranti')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>
       Simpan &amp; Tutup
     </button>
     <button class="btn-print-sm" onclick="window.print()">Cetak PDF</button>
+    <button class="btn-print-sm" style="color:#c03030;border-color:rgba(200,60,60,.25);background:rgba(200,60,60,.06)" onclick="confirmClear()" title="Padam semua data">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+    </button>
+  </div>
+  <div style="padding:8px 24px;background:var(--bg-3);border-top:1px solid var(--border-soft);display:flex;align-items:center;gap:8px;flex-shrink:0">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--gold-3)" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    <span id="save-status" style="font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.06em;color:var(--muted)">Tiada data tersimpan</span>
   </div>
 </div>
 
@@ -1000,6 +1007,99 @@ Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memb
 let ringkasanData=[], projekData=[], kewanganData=[], kpiData=[], tlData=[], imgData=[];
 const PALETTE=["#4a2880","#5c3499","#7b52b8","#1f7a42","#3a6080","#5a3a7a","#5a6a8a"];
 const catOpts=["Jalan Raya","Saliran","Bangunan","Kemudahan Awam","Lain-lain"];
+const STORAGE_KEY="mdph_laporan_data";
+
+/* ═══════════════════════════════════════
+   LOCAL STORAGE — SAVE / LOAD / CLEAR
+═══════════════════════════════════════ */
+function saveToStorage(){
+  try{
+    const payload={
+      tahun: document.getElementById("f-tahun").value,
+      nama:  document.getElementById("f-nama").value,
+      jawatan: document.getElementById("f-jawatan").value,
+      visi:  document.getElementById("f-visi").value,
+      misi:  document.getElementById("f-misi").value,
+      salut: document.getElementById("f-salut").value,
+      aluanBody: document.getElementById("f-aluan-body").value,
+      aluanPhotoSrc: (document.getElementById("aluan-photo-img-left")||{}).src||"",
+      ringkasanData, projekData, kewanganData, kpiData, tlData,
+      imgData,
+      savedAt: new Date().toISOString()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    updateSaveStatus(payload.savedAt);
+  } catch(e){
+    console.warn("Gagal simpan:",e);
+  }
+}
+
+function loadFromStorage(){
+  try{
+    const raw=localStorage.getItem(STORAGE_KEY);
+    if(!raw)return false;
+    const d=JSON.parse(raw);
+
+    /* Text fields */
+    if(d.tahun!==undefined){ document.getElementById("f-tahun").value=d.tahun; syncTahun(d.tahun); }
+    if(d.nama!==undefined)   document.getElementById("f-nama").value=d.nama;
+    if(d.jawatan!==undefined) document.getElementById("f-jawatan").value=d.jawatan;
+    if(d.visi!==undefined)   document.getElementById("f-visi").value=d.visi;
+    if(d.misi!==undefined)   document.getElementById("f-misi").value=d.misi;
+    if(d.salut!==undefined)  document.getElementById("f-salut").value=d.salut;
+    if(d.aluanBody!==undefined) document.getElementById("f-aluan-body").value=d.aluanBody;
+
+    /* Aluan photo */
+    if(d.aluanPhotoSrc && d.aluanPhotoSrc.startsWith("data:")){
+      const img=document.getElementById("aluan-photo-img-left");
+      if(img) img.src=d.aluanPhotoSrc;
+    }
+
+    /* Arrays */
+    if(Array.isArray(d.ringkasanData)){ ringkasanData=d.ringkasanData; renderRingkasanRepeater(); renderRingkasanPreview(); }
+    if(Array.isArray(d.projekData))   { projekData=d.projekData;   renderProjekRepeater();   renderProjekPreview(); }
+    if(Array.isArray(d.kewanganData)) { kewanganData=d.kewanganData; renderKewanganRepeater(); renderKewanganPreview(); }
+    if(Array.isArray(d.kpiData))      { kpiData=d.kpiData;       renderKPIRepeater();      renderKPIPreview(); }
+    if(Array.isArray(d.tlData))       { tlData=d.tlData;         renderTLRepeater();        renderTLPreview(); }
+    if(Array.isArray(d.imgData))      { imgData=d.imgData;       renderImgGrid(); }
+
+    syncName();
+    renderVisiMisi();
+    renderAluan();
+    updateSaveStatus(d.savedAt);
+    updateProgress();
+    return true;
+  } catch(e){
+    console.warn("Gagal muat:",e);
+    return false;
+  }
+}
+
+function updateSaveStatus(isoString){
+  const el=document.getElementById("save-status");
+  if(!el||!isoString)return;
+  const d=new Date(isoString);
+  const fmt=d.toLocaleDateString("ms-MY",{day:"2-digit",month:"short",year:"numeric"})+
+            " · "+d.toLocaleTimeString("ms-MY",{hour:"2-digit",minute:"2-digit"});
+  el.textContent="Disimpan: "+fmt;
+  el.style.color="var(--gold)";
+}
+
+function confirmClear(){
+  if(confirm("Padam semua data yang tersimpan? Tindakan ini tidak boleh dibatalkan.")){
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  }
+}
+
+/* Auto-save debounce — saves 1.5s after last change */
+let _saveTimer=null;
+function autoSave(){
+  clearTimeout(_saveTimer);
+  _saveTimer=setTimeout(()=>{
+    saveToStorage();
+  },1500);
+}
 
 /* ═══════════════════════════════════════
    PANEL
@@ -1062,6 +1162,7 @@ function updateProgress(){
     const dot=document.getElementById("dot-"+tabs[i]);
     if(dot)dot.classList.toggle("done",ok);
   });
+  autoSave();
 }
 
 /* ═══════════════════════════════════════
@@ -1071,6 +1172,7 @@ function syncTahun(val){
   document.querySelectorAll(".sync-tahun").forEach(el=>el.textContent=val||"—");
   const next=val&&!isNaN(val)?String(parseInt(val)+1):"—";
   document.querySelectorAll(".sync-tahun-next").forEach(el=>el.textContent=next);
+  autoSave();
 }
 function syncName(){
   const name=document.getElementById("f-nama").value;
@@ -1085,6 +1187,7 @@ function handleAluanImg(files){
   r.onload=ev=>{
     const img=document.getElementById("aluan-photo-img-left");
     if(img){img.src=ev.target.result;}
+    autoSave();
   };
   r.readAsDataURL(files[0]);
 }
@@ -1368,17 +1471,18 @@ function handleImgs(files){
   Array.from(files).forEach(f=>{
     if(!f.type.startsWith("image/"))return;
     const r=new FileReader();
-    r.onload=ev=>{imgData.push({src:ev.target.result,tajuk:f.name.replace(/\.[^.]+$/,""),caption:""});renderImgGrid()};
+    r.onload=ev=>{imgData.push({src:ev.target.result,tajuk:f.name.replace(/\.[^.]+$/,""),caption:""});renderImgGrid();autoSave();};
     r.readAsDataURL(f);
   });
   document.getElementById("img-input").value="";
 }
-function delImg(i){imgData.splice(i,1);renderImgGrid();}
+function delImg(i){imgData.splice(i,1);renderImgGrid();autoSave();}
 function escHtml(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function syncImgPrint(i){
   const el=document.getElementById("img-print-"+i);if(!el)return;
   const im=imgData[i];
   el.innerHTML='<strong>'+escHtml(im.tajuk||"Gambar "+(i+1))+'</strong><span>'+escHtml(im.caption)+'</span>';
+  autoSave();
 }
 function renderImgGrid(){
   const g=document.getElementById("img-grid");
@@ -1473,18 +1577,22 @@ Saya ingin merakamkan setinggi-tinggi penghargaan kepada seluruh warga jabatan a
 }
 
 /* ═══════════════════════════════════════
-   INIT
+   INIT — load saved data or defaults
 ═══════════════════════════════════════ */
-syncTahun(document.getElementById("f-tahun").value);
-syncName();
-renderVisiMisi();
-renderAluan();
-renderRingkasanPreview();
-renderProjekPreview();
-renderKewanganPreview();
-renderKPIPreview();
-renderTLPreview();
-updateProgress();
+const _loaded = loadFromStorage();
+if(!_loaded){
+  /* No saved data — render defaults */
+  syncTahun(document.getElementById("f-tahun").value);
+  syncName();
+  renderVisiMisi();
+  renderAluan();
+  renderRingkasanPreview();
+  renderProjekPreview();
+  renderKewanganPreview();
+  renderKPIPreview();
+  renderTLPreview();
+  updateProgress();
+}
 </script>
 </body>
 </html>
