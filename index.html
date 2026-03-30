@@ -1,0 +1,1327 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Tahunan Kejuruteraan MDPH 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Outfit',sans-serif;font-weight:400;color:#1e1a2e;background:#ede9f7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+:root{
+  --bg:#ede9f7;--bg-2:#e6e1f3;--bg-3:#ddd8ed;--bg-4:#d4cee7;
+  --panel:#ffffff;--gold:#9a7320;--gold-2:#b8902e;--gold-3:#c9a84c;
+  --gold-faint:rgba(154,115,32,0.1);--border:rgba(154,115,32,0.22);
+  --border-soft:rgba(90,70,140,0.1);--border-purple:rgba(120,100,180,0.15);
+  --text:#1e1a2e;--text-2:#3d3555;--text-3:#5a5275;--muted:#8880a8;
+  --navy-dark:#0f1628;--navy-mid:#1a2340;--r:14px;--r-sm:8px;
+  --panel-w:520px;
+}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold-3);border-radius:2px}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:300;height:60px;background:rgba(237,233,247,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border-purple);display:flex;align-items:center;justify-content:space-between;padding:0 40px;gap:20px;box-shadow:0 1px 16px rgba(90,70,140,0.08);}
+.nav-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nav-logo-wrap{width:34px;height:34px;background:var(--panel);border:1px solid var(--border-purple);border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.nav-logo-wrap img{width:28px;height:28px;object-fit:contain}
+.nav-brand-text strong{display:block;font-size:12px;font-weight:600;color:var(--gold);letter-spacing:0.05em;text-transform:uppercase}
+.nav-brand-text span{display:block;font-size:11px;color:var(--muted);margin-top:-1px;font-family:'DM Mono',monospace;letter-spacing:.04em}
+.nav-links{display:flex;align-items:center;gap:1px}
+.nav-links a{font-size:11px;font-weight:500;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:6px;transition:color .2s,background .2s;white-space:nowrap;letter-spacing:.04em;text-transform:uppercase;font-family:'DM Mono',monospace;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);background:var(--gold-faint)}
+
+/* ── DATA ENTRY BUTTON (fixed) ── */
+.fab-data{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  display:flex;align-items:center;gap:10px;
+  padding:14px 22px;border-radius:50px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:#fff;border:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;
+  box-shadow:0 6px 28px rgba(154,115,32,.45);
+  transition:transform .2s,box-shadow .2s;
+  letter-spacing:.04em;
+}
+.fab-data:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(154,115,32,.5)}
+.fab-data .fab-badge{
+  background:rgba(255,255,255,0.25);
+  border-radius:50px;padding:2px 8px;
+  font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.06em;
+}
+
+/* ── SLIDE PANEL ── */
+.panel-overlay{
+  position:fixed;inset:0;z-index:900;
+  background:rgba(15,10,30,.45);
+  backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s;
+}
+.panel-overlay.open{opacity:1;pointer-events:all}
+.slide-panel{
+  position:fixed;top:0;right:0;bottom:0;
+  width:var(--panel-w);z-index:901;
+  background:var(--panel);
+  box-shadow:-20px 0 60px rgba(30,20,60,.18);
+  display:flex;flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.slide-panel.open{transform:translateX(0)}
+
+/* Panel Header */
+.panel-hdr{
+  padding:20px 24px 0;
+  border-bottom:1px solid var(--border-soft);
+  background:var(--bg-2);flex-shrink:0;
+}
+.panel-hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.panel-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.06em;color:var(--text)}
+.panel-subtitle{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.06em;margin-top:-2px}
+.panel-close{width:36px;height:36px;border-radius:8px;border:1px solid var(--border-soft);background:var(--panel);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:background .2s,color .2s;}
+.panel-close:hover{background:rgba(200,60,60,.1);color:#c03030;border-color:rgba(200,60,60,.2)}
+
+/* Progress bar */
+.panel-progress-wrap{margin-bottom:16px}
+.panel-progress-top{display:flex;justify-content:space-between;margin-bottom:6px}
+.panel-progress-lbl{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.panel-progress-pct{font-size:11px;font-weight:700;color:var(--gold);font-family:'DM Mono',monospace}
+.panel-progress-bar{height:4px;background:rgba(90,70,140,.1);border-radius:99px;overflow:hidden}
+.panel-progress-fill{height:100%;background:linear-gradient(to right,var(--gold),var(--gold-3));border-radius:99px;transition:width .4s}
+
+/* Tabs */
+.panel-tabs{display:flex;gap:2px;overflow-x:auto;padding-bottom:0;scrollbar-width:none}
+.panel-tabs::-webkit-scrollbar{display:none}
+.panel-tab{
+  flex-shrink:0;padding:9px 14px;border-radius:8px 8px 0 0;
+  font-size:11px;font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer;border:1px solid transparent;border-bottom:none;
+  background:transparent;position:relative;top:1px;transition:color .2s,background .2s;
+  display:flex;align-items:center;gap:6px;
+}
+.panel-tab.active{color:var(--gold);background:var(--panel);border-color:var(--border-soft)}
+.panel-tab .tab-dot{width:6px;height:6px;border-radius:50%;background:rgba(90,70,140,.2);flex-shrink:0}
+.panel-tab .tab-dot.done{background:var(--gold)}
+
+/* Panel Body */
+.panel-body{flex:1;overflow-y:auto;padding:28px 24px}
+
+/* Tab panes */
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* Field styles */
+.field{margin-bottom:20px}
+.field label{display:block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid var(--border-soft);border-radius:9px;
+  padding:11px 14px;font-size:13.5px;color:var(--text);background:var(--bg-2);
+  font-family:'Outfit',sans-serif;line-height:1.6;outline:none;
+  transition:border-color .2s,background .2s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--gold);background:var(--panel)}
+.field textarea{resize:vertical;min-height:120px}
+.field-row{display:grid;gap:12px}
+.field-row.col2{grid-template-columns:1fr 1fr}
+.field-row.col3{grid-template-columns:1fr 1fr 1fr}
+
+/* Section title in panel */
+.psec{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;color:var(--text);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.psec::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
+
+/* Quick fill button */
+.btn-sample{
+  width:100%;padding:12px;border-radius:10px;
+  border:1px dashed var(--border);background:var(--gold-faint);
+  color:var(--gold);font-size:12px;font-weight:700;cursor:pointer;
+  font-family:'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;
+  transition:background .2s,border-color .2s;margin-bottom:22px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-sample:hover{background:rgba(154,115,32,.18);border-color:var(--gold)}
+
+/* Repeater */
+.repeater-item{
+  background:var(--bg-2);border:1px solid var(--border-soft);
+  border-radius:12px;padding:16px;margin-bottom:10px;position:relative;
+}
+.repeater-item .del-btn{
+  position:absolute;top:12px;right:12px;
+  width:26px;height:26px;border-radius:6px;
+  border:none;background:rgba(200,60,60,.1);
+  color:#c03030;cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;
+  opacity:.5;transition:opacity .2s;
+}
+.repeater-item .del-btn:hover{opacity:1}
+.repeater-item .field{margin-bottom:12px}
+.repeater-item .field:last-child{margin-bottom:0}
+.btn-add{
+  width:100%;padding:11px;border-radius:10px;
+  border:1px dashed var(--border);background:transparent;
+  color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'DM Mono',monospace;letter-spacing:.07em;text-transform:uppercase;
+  transition:border-color .2s,background .2s;margin-top:8px;
+}
+.btn-add:hover{border-color:var(--gold);background:var(--gold-faint)}
+
+/* Panel footer */
+.panel-footer{
+  padding:16px 24px;border-top:1px solid var(--border-soft);
+  background:var(--bg-2);flex-shrink:0;
+  display:flex;gap:10px;align-items:center;
+}
+.btn-apply{
+  flex:1;padding:13px;border-radius:10px;
+  background:var(--gold);color:#fff;border:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:.05em;transition:background .2s;
+}
+.btn-apply:hover{background:var(--gold-2)}
+.btn-print-sm{
+  padding:13px 18px;border-radius:10px;
+  border:1px solid var(--border);background:var(--panel);
+  color:var(--gold);font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;
+  transition:background .2s;white-space:nowrap;
+}
+.btn-print-sm:hover{background:var(--gold-faint)}
+
+/* Color picker row */
+.color-row{display:flex;align-items:center;gap:8px}
+.color-row input[type=color]{width:36px;height:36px;border-radius:8px;border:1px solid var(--border-soft);cursor:pointer;padding:2px;background:var(--bg-2)}
+
+/* ── REPORT STYLES ── */
+.hero{background:var(--bg-2);position:relative;overflow:hidden;padding:0;min-height:90vh;display:flex;flex-direction:column;}
+.hero-diagonal-bg{position:absolute;inset:0;background:linear-gradient(135deg,var(--bg) 0%,var(--bg) 52%,var(--bg-3) 52%,var(--bg-3) 100%);z-index:0;}
+.hero-gold-stripe{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,transparent 0%,transparent 51%,rgba(154,115,32,0.55) 51%,rgba(201,168,76,0.8) 52%,rgba(154,115,32,0.4) 53%,transparent 53.5%,transparent 56%,rgba(154,115,32,0.06) 56%,rgba(154,115,32,0.02) 59%,transparent 64%);z-index:1;pointer-events:none;}
+.hero-noise{position:absolute;inset:0;z-index:2;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;}
+.hero-bottom-fade{position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,var(--bg));z-index:3;pointer-events:none;}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:4;display:grid;grid-template-columns:1fr 380px;gap:0;align-items:stretch;flex:1;padding:80px 56px 100px;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding-right:60px}
+.hero-eyebrow{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(154,115,32,0.1);border:1px solid var(--border);border-radius:100px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);}
+.hero-chip-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-year-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+.hero-org{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);opacity:.75;margin-bottom:16px}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,100px);color:var(--text);line-height:.95;letter-spacing:.02em;margin-bottom:8px;}
+.hero h1 .line-italic{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.75em;font-weight:400;color:var(--gold);display:block;letter-spacing:.04em;}
+.hero-rule{width:80px;height:2px;background:linear-gradient(to right,var(--gold),transparent);margin:28px 0}
+.hero-desc{font-size:14px;color:var(--text-3);line-height:1.8;max-width:500px;letter-spacing:.01em}
+.hero-right{position:relative;display:flex;align-items:flex-end;justify-content:center;padding-bottom:60px;}
+.hero-photo-wrap{position:relative;z-index:1;width:100%}
+.hero-photo-inner{width:100%;border-radius:0;overflow:hidden;position:relative}
+.hero-photo-inner img{width:100%;display:block;max-height:520px;object-fit:cover;object-position:center top;filter:grayscale(8%) contrast(1.05)}
+.hero-photo-inner::before{content:'';position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(to top,rgba(237,233,247,.9) 0%,transparent 100%);z-index:2;pointer-events:none;}
+.hero-photo-inner::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),rgba(154,115,32,0.3),transparent);z-index:3;}
+.hero-photo-badge{position:absolute;bottom:0;left:0;right:0;z-index:4;padding:20px 24px;background:rgba(237,233,247,0.95);border-top:1px solid var(--border-purple);}
+.hero-photo-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.08em;color:var(--text);margin-bottom:3px}
+.hero-photo-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.hero-stats-strip{position:relative;z-index:10;background:var(--panel);border-top:1px solid var(--border-purple);display:grid;grid-template-columns:repeat(4,1fr);box-shadow:0 4px 20px rgba(90,70,140,0.08);}
+.hero-stat-cell{padding:24px 32px;border-right:1px solid var(--border-soft);position:relative}
+.hero-stat-cell:last-child{border-right:none}
+.hero-stat-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.hero-stat-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em;color:var(--gold-2)}
+.hero-stat-val.cream{color:var(--text)}
+
+.wrap{max-width:1200px;margin:0 auto;padding:72px 48px 96px}
+section{margin-bottom:80px;scroll-margin-top:72px}
+.sh{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border-purple);}
+.sh-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.2em;color:var(--gold);border:1px solid var(--border);padding:6px 12px;border-radius:6px;background:var(--gold-faint);white-space:nowrap;}
+.sh-body h2{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:.04em;color:var(--text);line-height:1}
+.sh-body p{font-size:13px;color:var(--muted);margin-top:5px;letter-spacing:.02em;font-family:'DM Mono',monospace}
+.card{background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--r);overflow:hidden;box-shadow:0 2px 20px rgba(90,70,140,0.07);position:relative;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold-3),transparent)}
+.card-body{padding:28px}
+.badge{display:inline-block;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.04em;font-family:'DM Mono',monospace}
+.badge-ok{background:rgba(50,130,80,.1);color:#1f7a42;border:1px solid rgba(50,130,80,.2)}
+.badge-wip{background:rgba(154,115,32,.1);color:var(--gold);border:1px solid rgba(154,115,32,.2)}
+
+/* ALUAN */
+.aluan-poster{background:var(--panel);border-radius:16px;overflow:hidden;box-shadow:0 8px 48px rgba(60,40,120,0.14);border:1px solid var(--border-purple);position:relative;}
+.aluan-banner{background:linear-gradient(135deg,#c8b87a,#d4c88a,#b8a060,#c8b87a);padding:13px 36px;display:flex;align-items:center;justify-content:center;}
+.aluan-banner-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(30,20,10,0.75);font-weight:500;}
+.aluan-body{display:grid;grid-template-columns:1fr 300px;min-height:560px;position:relative;}
+.aluan-text{padding:48px 40px 48px 48px;position:relative;z-index:2;}
+.aluan-heading-block{margin-bottom:24px}
+.aluan-label{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block;}
+.aluan-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,4.5vw,54px);letter-spacing:.04em;line-height:.95;color:var(--text);margin-bottom:8px;}
+.aluan-sub{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.06em;margin-top:10px;}
+.aluan-divider{width:60px;height:2px;background:linear-gradient(to right,var(--gold),var(--gold-3),transparent);margin:20px 0;}
+.aluan-salutation{font-size:14px;font-weight:600;color:var(--text);margin-bottom:18px;letter-spacing:.01em;}
+.aluan-para{font-size:13.2px;line-height:1.9;color:var(--text-3);margin-bottom:12px;font-weight:300;}
+.aluan-closing-txt{font-size:13px;color:var(--muted);font-style:italic;margin-top:20px;}
+.aluan-photo-col{position:relative;overflow:hidden;background:linear-gradient(to bottom,var(--bg-2) 0%,var(--bg-3) 100%);}
+.aluan-photo-col img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(5%) contrast(1.04) brightness(.98);mask-image:linear-gradient(to bottom,black 0%,black 65%,transparent 95%);-webkit-mask-image:linear-gradient(to bottom,black 0%,black 65%,transparent 95%);}
+.aluan-photo-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--muted);background:var(--bg-2);}
+.aluan-footer{position:relative;background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy-mid) 50%,#0d1c38 100%);padding:28px 48px 32px;display:grid;grid-template-columns:1fr 300px;align-items:center;overflow:hidden;}
+.aluan-footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold-3),var(--gold),var(--gold-3));}
+.aluan-footer-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.1em;color:#fff;margin-bottom:6px;}
+.aluan-footer-pos{font-family:'DM Mono',monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-3);}
+
+/* VISI MISI */
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vm-dark{background:linear-gradient(135deg,var(--bg-2),var(--bg-3));border:1px solid var(--border-purple);border-radius:var(--r);padding:44px 46px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(90,70,140,0.07);}
+.vm-dark::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,rgba(154,115,32,0.4),var(--gold),rgba(154,115,32,0.4))}
+.vm-dark .vm-icon{width:42px;height:42px;border-radius:10px;background:var(--gold-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.vm-dark h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.06em;color:var(--text);margin-bottom:18px}
+.vm-dark p{font-size:14px;color:var(--text-3);line-height:1.9;font-weight:300}
+.vm-light{background:var(--panel);border:1px solid var(--border-soft);border-radius:var(--r);padding:44px 46px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(90,70,140,0.05);}
+.vm-light::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),transparent)}
+.vm-light .vm-icon{width:42px;height:42px;border-radius:10px;background:var(--gold-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.vm-light h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.06em;color:var(--text);margin-bottom:18px}
+.vm-light ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.vm-light li{font-size:14px;color:var(--text-3);line-height:1.75;padding-left:22px;position:relative;font-weight:300}
+.vm-light li::before{content:'';position:absolute;left:0;top:12px;width:8px;height:1px;background:var(--gold);display:block}
+
+/* OBJEKTIF */
+.obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.obj-item{background:var(--panel);border:1px solid var(--border-soft);border-radius:12px;padding:30px 28px;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s;box-shadow:0 2px 10px rgba(90,70,140,0.05);}
+.obj-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--acc);opacity:.7}
+.obj-item:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(90,70,140,0.12)}
+.obj-num{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.15em;color:var(--gold);margin-bottom:14px;opacity:.7}
+.obj-item p{font-size:13.5px;color:var(--text-3);line-height:1.85;font-weight:300}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto}
+table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+table.tbl th{background:var(--bg-2);color:var(--gold);padding:12px 16px;text-align:left;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;border-bottom:1px solid var(--border-purple)}
+table.tbl td{padding:11px 16px;border-bottom:1px solid rgba(90,70,140,0.06);vertical-align:middle;background:var(--panel);color:var(--text-2)}
+table.tbl tr:nth-child(even) td{background:rgba(90,70,140,0.02)}
+table.tbl tr:hover td{background:var(--gold-faint)}
+table.tbl tfoot td{padding:13px 16px;background:rgba(154,115,32,.08);font-weight:600;color:var(--gold)}
+
+/* KPI */
+.kpi-prev-item{background:var(--bg-2);border:1px solid var(--border-soft);border-radius:12px;padding:26px 28px;margin-bottom:12px;position:relative;overflow:hidden;}
+.kpi-prev-item::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold-3),transparent)}
+.kpi-prev-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.kpi-prev-label{font-size:14px;font-weight:500;color:var(--text-2)}
+.kpi-prev-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.05em}
+.kpi-track{height:6px;border-radius:99px;background:rgba(90,70,140,0.1);position:relative;overflow:visible;margin-bottom:10px}
+.kpi-fill{height:100%;border-radius:99px;transition:width .6s}
+.kpi-target-line{position:absolute;top:-4px;height:14px;width:2px;background:rgba(154,115,32,0.5);border-radius:1px}
+.kpi-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+
+/* STATS PREVIEW */
+.stats-preview{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border-soft);border-radius:12px;overflow:hidden}
+.stat-prev{padding:28px 24px;text-align:center;background:var(--bg-2);border-right:1px solid var(--border-soft);position:relative}
+.stat-prev::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold-3),transparent)}
+.stat-prev:last-child{border-right:none}
+.stat-prev-val{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.04em;color:var(--gold-2);margin-bottom:6px}
+.stat-prev-lbl{font-family:'DM Mono',monospace;font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+/* IMAGES */
+.img-zone{border:2px dashed var(--border);border-radius:14px;padding:40px 36px;text-align:center;background:var(--bg-2);cursor:pointer;transition:border-color .25s,background .25s,transform .2s;margin-bottom:28px}
+.img-zone:hover{border-color:var(--gold);background:var(--gold-faint);transform:scale(1.005)}
+.img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.img-item{
+  background:var(--panel);border:1px solid var(--border-soft);
+  border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 2px 14px rgba(90,70,140,0.07);
+  transition:box-shadow .22s,border-color .22s,transform .22s;
+  position:relative;
+}
+.img-item:hover{box-shadow:0 10px 32px rgba(90,70,140,0.14);border-color:var(--border-purple);transform:translateY(-3px)}
+.img-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold-3),transparent);z-index:1}
+.img-thumb{aspect-ratio:4/3;overflow:hidden;position:relative;background:var(--bg-3)}
+.img-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.img-item:hover .img-thumb img{transform:scale(1.05)}
+.img-num{
+  position:absolute;top:10px;left:10px;
+  width:26px;height:26px;border-radius:8px;
+  background:rgba(15,10,30,.65);backdrop-filter:blur(6px);
+  color:#fff;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.06em;
+  display:flex;align-items:center;justify-content:center;z-index:3;
+}
+.img-del{
+  position:absolute;top:10px;right:10px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(4px);
+  border:none;color:white;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;z-index:3;
+  transition:background .2s,transform .15s;
+}
+.img-del:hover{background:rgba(200,30,30,.85);transform:scale(1.1)}
+/* editable meta below thumb */
+.img-meta-edit{
+  padding:14px 16px 16px;border-top:1px solid var(--border-soft);
+  background:var(--panel);display:flex;flex-direction:column;gap:8px;
+}
+.img-meta-edit .img-lbl{
+  font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px;
+}
+.img-meta-edit .img-tajuk-input{
+  width:100%;border:1px solid var(--border-soft);border-radius:8px;
+  padding:8px 12px;font-size:13px;font-weight:600;color:var(--gold-2);
+  background:var(--bg-2);font-family:'Outfit',sans-serif;outline:none;
+  transition:border-color .2s,background .2s;
+}
+.img-meta-edit .img-tajuk-input:focus{border-color:var(--gold);background:var(--panel)}
+.img-meta-edit .img-caption-input{
+  width:100%;border:1px solid var(--border-soft);border-radius:8px;
+  padding:7px 12px;font-size:12px;color:var(--text-3);
+  background:var(--bg-2);font-family:'Outfit',sans-serif;outline:none;
+  transition:border-color .2s,background .2s;
+}
+.img-meta-edit .img-caption-input:focus{border-color:var(--gold);background:var(--panel)}
+/* print version of image card */
+.img-print-meta{display:none;padding:10px 14px;border-top:1px solid var(--border-soft);background:var(--panel)}
+.img-print-meta strong{display:block;font-size:12px;font-weight:700;color:var(--gold-2);margin-bottom:3px}
+.img-print-meta span{font-size:11px;color:var(--text-3)}
+@media print{
+  .img-meta-edit{display:none!important}
+  .img-print-meta{display:block!important}
+  .img-del,.img-zone,.no-print{display:none!important}
+}
+
+/* PELAN */
+.pelan-shell{background:linear-gradient(135deg,var(--bg-2),var(--bg-3));border-radius:0 0 var(--r) var(--r);padding:40px;position:relative;overflow:hidden}
+.pelan-prev-total{text-align:center;margin-bottom:32px;padding:32px}
+.pelan-prev-total-val{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:.06em;color:var(--gold-2)}
+.pelan-prev-total-lbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:10px;letter-spacing:.1em;text-transform:uppercase}
+
+/* FOOTER */
+.footer{background:var(--bg-2);border-top:1px solid var(--border-purple);padding:56px 40px;text-align:center;position:relative;overflow:hidden;}
+.footer::before{content:'MDPH';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);font-family:'Bebas Neue',sans-serif;font-size:160px;letter-spacing:.1em;color:var(--gold);opacity:.04;white-space:nowrap;pointer-events:none;}
+.footer-logo{width:48px;height:48px;background:var(--panel);border:1px solid var(--border-purple);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 2px 10px rgba(90,70,140,0.08);}
+.footer-logo img{width:38px;height:38px;object-fit:contain}
+.footer h4{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.08em;color:var(--text);margin-bottom:5px}
+.footer p{font-size:12px;color:var(--muted);margin-top:3px;font-family:'DM Mono',monospace;letter-spacing:.05em}
+.footer-rule{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:20px auto}
+
+/* FADE */
+.fade{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade.in{opacity:1;transform:none}
+
+/* Empty state */
+.empty-state{text-align:center;padding:40px;color:var(--muted);font-size:13px;font-family:'DM Mono',monospace;letter-spacing:.04em;border:1px dashed var(--border);border-radius:12px;margin:20px 0}
+
+/* PRINT */
+@media print{
+  .no-print,.nav,.fab-data,.panel-overlay,.slide-panel{display:none!important}
+  body{background:white;color:#111;font-size:12px}
+  .wrap{padding:0;max-width:100%}
+  section{margin-bottom:28px;page-break-inside:avoid}
+  .hero{min-height:auto;padding:32px 28px 60px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .fade{opacity:1!important;transform:none!important}
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav{padding:0 18px}
+  .nav-links{display:none}
+  .hero-inner{grid-template-columns:1fr;padding:60px 28px 80px}
+  .hero-right{display:none}
+  .hero-stats-strip{grid-template-columns:1fr 1fr}
+  .wrap{padding:36px 20px 72px}
+  .vm-grid,.obj-grid,.img-grid{grid-template-columns:1fr}
+  .aluan-body{grid-template-columns:1fr}
+  .aluan-photo-col{display:none}
+  .slide-panel{width:100%}
+  .field-row.col2,.field-row.col3{grid-template-columns:1fr}
+}
+
+/* TOAST */
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(8px);z-index:2000;background:var(--gold);color:#fff;padding:10px 24px;border-radius:50px;font-size:12px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:.06em;text-transform:uppercase;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav no-print">
+  <a class="nav-brand" href="#">
+    <div class="nav-logo-wrap">
+      <img src="https://lh3.googleusercontent.com/d/1gkq2KUDeSahQT9db8KgIs6HtDotaeao1" alt="MDPH">
+    </div>
+    <div class="nav-brand-text">
+      <strong>Jabatan Kejuruteraan</strong>
+      <span>MDPH · Laporan Tahunan</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#aluan">Aluan</a>
+    <a href="#objektif">Objektif</a>
+    <a href="#ringkasan">Pencapaian</a>
+    <a href="#projek">Projek</a>
+    <a href="#bergambar">Bergambar</a>
+    <a href="#kewangan">Kewangan</a>
+    <a href="#kpi">KPI</a>
+    <a href="#timeline">Suku Tahunan</a>
+    <a href="#pelan">Pelan</a>
+  </div>
+  <button class="btn-print-sm no-print" onclick="window.print()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+    Cetak PDF
+  </button>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-diagonal-bg"></div>
+  <div class="hero-gold-stripe"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-bottom-fade"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-chip"><div class="hero-chip-dot"></div>Laporan Rasmi</div>
+        <div class="hero-year-tag">Tahun <span class="sync-tahun">2025</span></div>
+      </div>
+      <div class="hero-org">Majlis Daerah Pengkalan Hulu &nbsp;·&nbsp; MDPH</div>
+      <h1>Laporan<br>Tahunan<span class="line-italic">Jabatan Kejuruteraan</span></h1>
+      <div class="hero-rule"></div>
+      <p class="hero-desc">Dokumentasi pencapaian, projek pembangunan infrastruktur serta laporan prestasi Jabatan Kejuruteraan MDPH bagi tahun <span class="sync-tahun">2025</span>.</p>
+    </div>
+
+  </div>
+  <div class="hero-stats-strip">
+    <div class="hero-stat-cell">
+      <div class="hero-stat-lbl">Tahun Laporan</div>
+      <div class="hero-stat-val"><span class="sync-tahun">2025</span></div>
+    </div>
+    <div class="hero-stat-cell">
+      <div class="hero-stat-lbl">Jumlah Projek</div>
+      <div class="hero-stat-val cream" id="pill-projek">—</div>
+    </div>
+    <div class="hero-stat-cell">
+      <div class="hero-stat-lbl">Perbelanjaan</div>
+      <div class="hero-stat-val cream" id="pill-belanja">—</div>
+    </div>
+    <div class="hero-stat-cell">
+      <div class="hero-stat-lbl">Kadar Siap</div>
+      <div class="hero-stat-val cream" id="pill-kadar">—</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- KATA ALUAN -->
+  <section class="fade" id="aluan">
+    <div class="sh">
+      <div class="sh-num">01</div>
+      <div class="sh-body"><h2>Kata Aluan Ketua Jabatan</h2><p>Perutusan daripada Ketua Jabatan Kejuruteraan</p></div>
+    </div>
+    <div class="aluan-poster">
+      <div class="aluan-banner"><span class="aluan-banner-text">Laporan Tahunan <span class="sync-tahun">2025</span></span></div>
+      <div class="aluan-body">
+        <div class="aluan-text">
+          <div class="aluan-heading-block">
+            <span class="aluan-label">Perutusan</span>
+            <div class="aluan-h1">Ketua Jabatan<br>Kejuruteraan</div>
+            <div class="aluan-sub">Majlis Daerah Pengkalan Hulu &nbsp;|&nbsp; Tahun <span class="sync-tahun">2025</span></div>
+          </div>
+          <div class="aluan-divider"></div>
+          <div class="aluan-salutation" id="aluan-salut-disp">Assalamualaikum Warahmatullahi Wabarakatuh dan Salam Sejahtera,</div>
+          <div id="aluan-content-disp">
+            <p class="aluan-para">Syukur ke hadrat Allah SWT, Jabatan Kejuruteraan Majlis Daerah Pengkalan Hulu telah berjaya mengharungi tahun 2025 dengan pelbagai pencapaian serta cabaran yang ditangani dengan komitmen dan dedikasi.</p>
+            <p class="aluan-para">Sepanjang tahun ini, jabatan terus memainkan peranan penting dalam merancang, melaksana dan memantau projek pembangunan infrastruktur serta penyelenggaraan kemudahan awam bagi memastikan persekitaran yang selamat, kondusif dan mampan.</p>
+            <p class="aluan-para">Fokus utama meliputi pelaksanaan projek pembangunan, penyelenggaraan jalan, sistem perparitan, lampu jalan serta kemudahan awam lain, di samping memastikan setiap projek memenuhi spesifikasi, tempoh masa dan kualiti yang ditetapkan.</p>
+			<p class="aluan-para">Jabatan turut memperkukuhkan tadbir urus dan pengurusan projek melalui penambahbaikan sistem kerja serta peningkatan kecekapan sumber manusia.</p>
+			<p class="aluan-para">Walaupun berdepan cabaran seperti kekangan peruntukan, faktor cuaca dan peningkatan kos, jabatan terus komited melaksanakan setiap projek demi kepentingan rakyat.</p>
+			<p class="aluan-para">Setinggi-tinggi penghargaan kepada pihak pengurusan, agensi kerajaan, kontraktor serta seluruh warga jabatan atas kerjasama dan dedikasi yang diberikan.</p>
+			<p class="aluan-para">Semoga Jabatan Kejuruteraan terus komited dalam memberikan perkhidmatan yang berkualiti, cekap dan berintegriti.</p>
+			
+          </div>
+          <div class="aluan-closing-txt">Sekian, terima kasih.</div>
+        </div>
+        <div class="aluan-photo-col" id="aluan-photo-col">
+          <img src="https://lh3.googleusercontent.com/d/1NE_7MZ_MQhDdcGoqmTTtdSF8zUg372Bh" alt="Ketua Jabatan" id="aluan-photo-img2" onerror="this.style.display='none';document.getElementById('aluan-ph-placeholder').style.display='flex'">
+          <div class="aluan-photo-placeholder" id="aluan-ph-placeholder" style="display:none">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span style="font-size:11px;font-family:'DM Mono',monospace;text-align:center;padding:0 20px">Muat naik gambar ketua jabatan</span>
+          </div>
+        </div>
+      </div>
+      <div class="aluan-footer">
+        <div>
+          <div class="aluan-footer-name" id="aluan-name-disp">Mohd. Azizudin Bin Ismail</div>
+          <div class="aluan-footer-pos" id="aluan-pos-disp">Ketua Jabatan Kejuruteraan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISI MISI -->
+  <section class="fade">
+    <div class="sh"><div class="sh-num">02</div><div class="sh-body"><h2>Visi &amp; Misi</h2><p>Hala tuju dan matlamat Majlis Daerah Pengkalan Hulu</p></div></div>
+    <div class="vm-grid">
+      <div class="vm-dark">
+        <div class="vm-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Visi</h3>
+        <p id="visi-disp">Merancang, Mengurus dan mengawal pembangunan Majlis Daerah Pengkalan Hulu sebagai bandar sempadan supaya berdaya maju dan indah.</p>
+      </div>
+      <div class="vm-light">
+        <div class="vm-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg></div>
+        <h3>Misi</h3>
+        <ul id="misi-disp">
+          <li>Merancang dan menggalak pembangunan bandar dan aktiviti perdagangan</li>
+          <li>Menceriakan bandar dengan kemudahan rekreasi</li>
+          <li>Memastikan kebersihan dan perkhidmatan bandar ke tahap maksima</li>
+          <li>Memperbaki dan menaik taraf kemudahan infrastruktur serta pembangunan masyarakat</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBJEKTIF -->
+  <section class="fade" id="objektif">
+    <div class="sh"><div class="sh-num">03</div><div class="sh-body"><h2>Objektif Jabatan</h2><p>Hala tuju strategik Jabatan Kejuruteraan MDPH</p></div></div>
+    <div class="obj-grid" id="obj-grid">
+      <div class="obj-item" style="--acc:var(--gold)"><div class="obj-num">01</div><p>Membangunkan bandar Pengkalan Hulu sebagai sebuah bandar pelancongan sempadan yang mapan dan berdaya maju.</p></div>
+      <div class="obj-item" style="--acc:var(--gold-3)"><div class="obj-num">02</div><p>Merancang, melaksanakan, menyelenggara dan menyediakan pelbagai kemudahan infrastruktur awam dan asas untuk kemudahan penduduk setempat.</p></div>
+      <div class="obj-item" style="--acc:var(--gold-2)"><div class="obj-num">03</div><p>Menyelesaikan segala aduan yang diterima dari orang ramai dengan secepat mungkin berdasarkan peruntukan yang diutamakan.</p></div>
+      <div class="obj-item" style="--acc:var(--gold)"><div class="obj-num">04</div><p>Menyelaraskan segala aktiviti teknikal secara sistematik, amanah, jujur dan adil agar menghasilkan prestasi kerja yang berkualiti.</p></div>
+      <div class="obj-item" style="--acc:var(--gold-3)"><div class="obj-num">05</div><p>Mewujudkan peluang pelaburan pembangunan dan guna tenaga pelabur-pelabur swasta dalam dan luar negara.</p></div>
+    </div>
+  </section>
+
+  <!-- ORGANISASI -->
+  <section class="fade" id="organisasi">
+    <div class="sh"><div class="sh-num">04</div><div class="sh-body"><h2>Carta Organisasi</h2><p>Jabatan Kejuruteraan — Majlis Daerah Pengkalan Hulu</p></div></div>
+    <div class="card">
+      <div style="padding:36px;text-align:center;background:var(--panel)">
+        <img src="https://lh3.googleusercontent.com/d/1vKT26qQlYV9IPHXeasAR-uLyL2Fc8eBV" alt="Carta Organisasi" style="max-width:100%;height:auto;display:block;margin:0 auto;border-radius:10px">
+      </div>
+    </div>
+  </section>
+
+  <!-- RINGKASAN -->
+  <section class="fade" id="ringkasan">
+    <div class="sh"><div class="sh-num">05</div><div class="sh-body"><h2>Ringkasan Pencapaian <span class="sync-tahun">2025</span></h2><p>Petunjuk prestasi utama jabatan sepanjang tahun</p></div></div>
+    <div class="card card-body" style="padding:20px">
+      <div class="stats-preview" id="stats-preview"><div class="empty-state">Belum ada data. Buka <strong>Panel Isi Data</strong> → tab <strong>Pencapaian</strong>.</div></div>
+    </div>
+  </section>
+
+  <!-- PROJEK -->
+  <section class="fade" id="projek">
+    <div class="sh"><div class="sh-num">06</div><div class="sh-body"><h2>Projek Utama <span class="sync-tahun">2025</span></h2><p>Senarai projek pembangunan yang dilaksanakan</p></div></div>
+    <div class="card">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>#</th><th>Nama Projek</th><th>Kategori</th><th>Kos (RM)</th><th>Suku</th><th>Status</th><th style="min-width:140px">Kemajuan</th></tr></thead><tbody id="projek-tbody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- BERGAMBAR -->
+  <section class="fade" id="bergambar">
+    <div class="sh"><div class="sh-num">07</div><div class="sh-body"><h2>Laporan Bergambar <span class="sync-tahun">2025</span></h2><p>Dokumentasi visual projek-projek yang dilaksanakan</p></div></div>
+    <div class="card card-body">
+      <div class="img-zone no-print" onclick="document.getElementById('img-input').click()">
+        <input type="file" id="img-input" accept="image/*" multiple style="display:none" onchange="handleImgs(this.files)">
+        <div style="width:48px;height:48px;border-radius:12px;background:var(--gold-faint);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <p style="font-size:14px;font-weight:600;color:var(--gold);margin-bottom:5px">Muat Naik Gambar Projek</p>
+        <span style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">Klik atau seret gambar ke sini · JPG, PNG, WEBP</span>
+      </div>
+      <div class="img-grid" id="img-grid"></div>
+    </div>
+  </section>
+
+  <!-- KEWANGAN -->
+  <section class="fade" id="kewangan">
+    <div class="sh"><div class="sh-num">08</div><div class="sh-body"><h2>Laporan Kewangan <span class="sync-tahun">2025</span></h2><p>Peruntukan dan perbelanjaan mengikut kategori</p></div></div>
+    <div class="card">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Kategori</th><th>Peruntukan (RM)</th><th>Perbelanjaan (RM)</th><th>Baki (RM)</th><th>% Guna</th><th style="min-width:120px">Graf</th></tr></thead><tbody id="kewangan-tbody"></tbody><tfoot id="kewangan-tfoot"></tfoot></table></div>
+    </div>
+  </section>
+
+  <!-- KPI -->
+  <section class="fade" id="kpi">
+    <div class="sh"><div class="sh-num">09</div><div class="sh-body"><h2>Pencapaian KPI <span class="sync-tahun">2025</span></h2><p>Perbandingan sasaran dan pencapaian sebenar</p></div></div>
+    <div class="card card-body"><div id="kpi-list"></div></div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="fade" id="timeline">
+    <div class="sh"><div class="sh-num">10</div><div class="sh-body"><h2>Pencapaian Suku Tahunan <span class="sync-tahun">2025</span></h2><p>Aktiviti dan pencapaian mengikut suku tahun</p></div></div>
+    <div class="card">
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th style="width:140px">Suku Tahun</th><th style="width:200px">Fasa / Tajuk</th><th>Pencapaian Utama</th></tr></thead><tbody id="tl-tbody"></tbody></table></div>
+    </div>
+  </section>
+
+  <!-- PELAN -->
+  <section class="fade" id="pelan">
+    <div class="sh"><div class="sh-num">11</div><div class="sh-body"><h2>Pelan Strategik <span class="sync-tahun-next">2026</span></h2><p>Inisiatif dan peruntukan yang dirancang untuk tahun hadapan</p></div></div>
+    <div class="card">
+      <div class="pelan-shell">
+        <div class="pelan-prev-total">
+          <div class="pelan-prev-total-val" id="pelan-total-disp">—</div>
+          <div class="pelan-prev-total-lbl">Anggaran peruntukan keseluruhan <span class="sync-tahun-next">2026</span></div>
+        </div>
+        <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Inisiatif</th><th style="text-align:right">Peruntukan (RM)</th><th style="text-align:center">Tempoh</th><th>Sasaran</th></tr></thead><tbody id="pelan-tbody"></tbody></table></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-logo"><img src="https://lh3.googleusercontent.com/d/1gkq2KUDeSahQT9db8KgIs6HtDotaeao1" alt="MDPH"></div>
+  <h4>Jabatan Kejuruteraan MDPH</h4>
+  <p>Majlis Daerah Pengkalan Hulu</p>
+  <div class="footer-rule"></div>
+  <p>© <span class="sync-tahun-next">2026</span> MDPH · LAPORAN TAHUNAN · SULIT RASMI</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     FLOATING BUTTON
+═══════════════════════════════════════════ -->
+<button class="fab-data no-print" onclick="openPanel()">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+  Isi Data Laporan
+  <span class="fab-badge" id="fab-pct">0%</span>
+</button>
+
+<!-- ═══════════════════════════════════════════
+     SLIDE PANEL
+═══════════════════════════════════════════ -->
+<div class="panel-overlay no-print" id="panel-overlay" onclick="closePanel()"></div>
+<div class="slide-panel no-print" id="slide-panel">
+  
+  <!-- Panel Header -->
+  <div class="panel-hdr">
+    <div class="panel-hdr-top">
+      <div>
+        <div class="panel-title">Isi Data Laporan</div>
+        <div class="panel-subtitle">Semua data laporan diisi di sini · MDPH <span class="sync-tahun">2025</span></div>
+      </div>
+      <button class="panel-close" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-progress-wrap">
+      <div class="panel-progress-top">
+        <span class="panel-progress-lbl">Kemajuan pengisian data</span>
+        <span class="panel-progress-pct" id="prog-pct">0%</span>
+      </div>
+      <div class="panel-progress-bar"><div class="panel-progress-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="panel-tabs" id="panel-tabs">
+      <div class="panel-tab active" data-tab="maklumat" onclick="switchTab('maklumat')"><span class="tab-dot" id="dot-maklumat"></span>Maklumat</div>
+      <div class="panel-tab" data-tab="aluan" onclick="switchTab('aluan')"><span class="tab-dot" id="dot-aluan"></span>Aluan</div>
+      <div class="panel-tab" data-tab="ringkasan" onclick="switchTab('ringkasan')"><span class="tab-dot" id="dot-ringkasan"></span>Pencapaian</div>
+      <div class="panel-tab" data-tab="projek" onclick="switchTab('projek')"><span class="tab-dot" id="dot-projek"></span>Projek</div>
+      <div class="panel-tab" data-tab="kewangan" onclick="switchTab('kewangan')"><span class="tab-dot" id="dot-kewangan"></span>Kewangan</div>
+      <div class="panel-tab" data-tab="kpi" onclick="switchTab('kpi')"><span class="tab-dot" id="dot-kpi"></span>KPI</div>
+      <div class="panel-tab" data-tab="timeline" onclick="switchTab('timeline')"><span class="tab-dot" id="dot-timeline"></span>Suku Tahun</div>
+      <div class="panel-tab" data-tab="pelan" onclick="switchTab('pelan')"><span class="tab-dot" id="dot-pelan"></span>Pelan</div>
+    </div>
+  </div>
+
+  <!-- Panel Body -->
+  <div class="panel-body">
+
+    <!-- ── TAB: MAKLUMAT ── -->
+    <div class="tab-pane active" id="tab-maklumat">
+      <button class="btn-sample" onclick="fillSampleAll()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Isi Contoh Data Automatik (Demo)
+      </button>
+      <div class="psec">Maklumat Asas</div>
+      <div class="field">
+        <label>Tahun Laporan</label>
+        <input type="text" id="f-tahun" value="2025" maxlength="4" oninput="syncTahun(this.value)">
+      </div>
+      <div class="field-row col2">
+        <div class="field"><label>Nama Ketua Jabatan</label><input type="text" id="f-nama" value="Mohd. Azizudin Bin Ismail" oninput="syncName()"></div>
+        <div class="field"><label>Jawatan</label><input type="text" id="f-jawatan" value="Ketua Jabatan Kejuruteraan" oninput="syncName()"></div>
+      </div>
+      <div class="field">
+        <label>Gambar Ketua Jabatan</label>
+        <div style="border:1px dashed var(--border);border-radius:10px;padding:20px;text-align:center;background:var(--bg);cursor:pointer" onclick="document.getElementById('f-foto').click()">
+          <input type="file" id="f-foto" accept="image/*" style="display:none" onchange="handleAluanImg(this.files)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8" style="margin:0 auto 8px;display:block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span style="font-size:12px;color:var(--gold);font-weight:600">Klik untuk muat naik gambar</span><br>
+          <span style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace">Format potret · JPG/PNG</span>
+        </div>
+      </div>
+      <div class="psec">Visi &amp; Misi</div>
+      <div class="field"><label>Visi</label><textarea id="f-visi" rows="3" oninput="renderVisiMisi()">Merancang, Mengurus dan mengawal pembangunan Majlis Daerah Pengkalan Hulu sebagai bandar sempadan supaya berdaya maju dan indah.</textarea></div>
+      <div class="field" id="misi-fields">
+        <label>Misi (satu per baris)</label>
+        <textarea id="f-misi" rows="5" oninput="renderVisiMisi()">Merancang dan menggalak pembangunan bandar dan aktiviti perdagangan
+Menceriakan bandar dengan kemudahan rekreasi
+Memastikan kebersihan dan perkhidmatan bandar ke tahap maksima
+Memperbaki dan menaik taraf kemudahan infrastruktur serta pembangunan masyarakat</textarea>
+      </div>
+      <div style="margin-top:8px;text-align:right">
+        <button class="btn-apply" onclick="switchTab('aluan')">Seterusnya: Kata Aluan →</button>
+      </div>
+    </div>
+
+    <!-- ── TAB: ALUAN ── -->
+    <div class="tab-pane" id="tab-aluan">
+      <div class="psec">Kata Aluan Ketua Jabatan</div>
+      <div class="field"><label>Salam Pembuka</label><input type="text" id="f-salut" value="Assalamualaikum Warahmatullahi Wabarakatuh dan Salam Sejahtera," oninput="renderAluan()"></div>
+      <div class="field"><label>Kandungan Perutusan (setiap perenggan, tekan Enter dua kali)</label><textarea id="f-aluan-body" rows="12" oninput="renderAluan()">Alhamdulillah, Jabatan Kejuruteraan Majlis Daerah Pengkalan Hulu telah berjaya melaksanakan pelbagai projek dan tanggungjawab sepanjang tahun 2025 dengan baik, terancang serta berkesan.
+
+Sepanjang tahun ini, jabatan memberi tumpuan kepada pembangunan dan penyelenggaraan infrastruktur meliputi jalan raya, sistem perparitan, lampu jalan serta kemudahan awam. Usaha ini dilaksanakan bagi memastikan kesejahteraan, keselesaan dan keselamatan penduduk sentiasa terpelihara.
+
+Walaupun berdepan dengan pelbagai cabaran seperti kekangan peruntukan dan faktor luaran, komitmen serta kerjasama erat daripada semua pihak telah membolehkan setiap perancangan dilaksanakan dengan jayanya.
+
+Sehubungan itu, saya ingin merakamkan setinggi-tinggi penghargaan kepada seluruh warga jabatan, pihak pengurusan serta agensi-agensi berkaitan atas sokongan, kerjasama dan dedikasi yang telah diberikan.
+
+Adalah menjadi harapan agar Jabatan Kejuruteraan akan terus cemerlang dalam memberikan perkhidmatan yang berkualiti, cekap dan berintegriti demi kesejahteraan masyarakat.</textarea></div>
+      <div style="text-align:right"><button class="btn-apply" onclick="switchTab('ringkasan')">Seterusnya: Pencapaian →</button></div>
+    </div>
+
+    <!-- ── TAB: RINGKASAN ── -->
+    <div class="tab-pane" id="tab-ringkasan">
+      <div class="psec">Petunjuk Pencapaian</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px;font-family:'DM Mono',monospace;letter-spacing:.03em">Tambah angka-angka pencapaian utama jabatan. Nilai pertama akan dipaparkan di banner utama.</p>
+      <div id="stats-repeater"></div>
+      <button class="btn-add" onclick="addStat()">+ Tambah Petunjuk</button>
+      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('projek')">Seterusnya: Projek →</button></div>
+    </div>
+
+    <!-- ── TAB: PROJEK ── -->
+    <div class="tab-pane" id="tab-projek">
+      <div class="psec">Senarai Projek Utama</div>
+      <div id="projek-repeater"></div>
+      <button class="btn-add" onclick="addProjek()">+ Tambah Projek</button>
+      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('kewangan')">Seterusnya: Kewangan →</button></div>
+    </div>
+
+    <!-- ── TAB: KEWANGAN ── -->
+    <div class="tab-pane" id="tab-kewangan">
+      <div class="psec">Laporan Kewangan</div>
+      <div id="kewangan-repeater"></div>
+      <button class="btn-add" onclick="addKewangan()">+ Tambah Kategori</button>
+      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('kpi')">Seterusnya: KPI →</button></div>
+    </div>
+
+    <!-- ── TAB: KPI ── -->
+    <div class="tab-pane" id="tab-kpi">
+      <div class="psec">Petunjuk Prestasi Utama (KPI)</div>
+      <div id="kpi-repeater"></div>
+      <button class="btn-add" onclick="addKPI()">+ Tambah KPI</button>
+      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('timeline')">Seterusnya: Suku Tahun →</button></div>
+    </div>
+
+    <!-- ── TAB: TIMELINE ── -->
+    <div class="tab-pane" id="tab-timeline">
+      <div class="psec">Pencapaian Suku Tahunan</div>
+      <div id="tl-repeater"></div>
+      <button class="btn-add" onclick="addTL()">+ Tambah Suku Tahun</button>
+      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="switchTab('pelan')">Seterusnya: Pelan →</button></div>
+    </div>
+
+    <!-- ── TAB: PELAN ── -->
+    <div class="tab-pane" id="tab-pelan">
+      <div class="psec">Pelan Strategik Tahun Hadapan</div>
+      <div class="field"><label>Jumlah Peruntukan Keseluruhan</label><input type="text" id="f-pelan-total" placeholder="cth: RM 35 Juta" oninput="renderPelan()"></div>
+      <div id="pelan-repeater"></div>
+      <button class="btn-add" onclick="addPelan()">+ Tambah Inisiatif</button>
+      <div style="margin-top:18px;text-align:right"><button class="btn-apply" onclick="closePanel();toast('Semua data disimpan ✓')">✓ Selesai &amp; Tutup Panel</button></div>
+    </div>
+
+  </div>
+
+  <!-- Panel Footer -->
+  <div class="panel-footer">
+    <button class="btn-apply" onclick="closePanel();toast('Data disimpan ✓')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:6px"><polyline points="20 6 9 17 4 12"/></svg>
+      Simpan &amp; Tutup
+    </button>
+    <button class="btn-print-sm" onclick="window.print()">Cetak PDF</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════
+   DATA STORES
+═══════════════════════════════════════ */
+let statsData=[], projekData=[], kewanganData=[], kpiData=[], tlData=[], pelanData=[], imgData=[];
+const PALETTE=["#9a7320","#b8902e","#7a5c20","#1f7a42","#3a6080","#7a5c3a","#5a6a8a"];
+const catOpts=["Jalan Raya","Saliran","Bangunan","Kemudahan Awam","Lain-lain"];
+
+/* ═══════════════════════════════════════
+   PANEL
+═══════════════════════════════════════ */
+function openPanel(){
+  document.getElementById("slide-panel").classList.add("open");
+  document.getElementById("panel-overlay").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+function closePanel(){
+  document.getElementById("slide-panel").classList.remove("open");
+  document.getElementById("panel-overlay").classList.remove("open");
+  document.body.style.overflow="";
+}
+function switchTab(id){
+  document.querySelectorAll(".tab-pane").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".panel-tab").forEach(t=>t.classList.remove("active"));
+  document.getElementById("tab-"+id).classList.add("active");
+  document.querySelector(`[data-tab="${id}"]`).classList.add("active");
+}
+
+/* ═══════════════════════════════════════
+   TOAST
+═══════════════════════════════════════ */
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),2400);
+}
+
+/* ═══════════════════════════════════════
+   FADE OBSERVER
+═══════════════════════════════════════ */
+const fo=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");fo.unobserve(e.target)}}),{threshold:.06,rootMargin:"0px 0px -20px 0px"});
+document.querySelectorAll(".fade").forEach(el=>fo.observe(el));
+const navLinks=document.querySelectorAll(".nav-links a");
+const navObs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.remove("active"));const l=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);if(l)l.classList.add("active")}}),{rootMargin:"-50% 0px -50% 0px"});
+document.querySelectorAll("section[id]").forEach(s=>navObs.observe(s));
+
+/* ═══════════════════════════════════════
+   PROGRESS TRACKER
+═══════════════════════════════════════ */
+function updateProgress(){
+  const checks=[
+    !!document.getElementById("f-nama").value.trim(),
+    !!document.getElementById("f-aluan-body").value.trim(),
+    statsData.length>0,
+    projekData.length>0,
+    kewanganData.length>0,
+    kpiData.length>0,
+    tlData.length>0,
+    pelanData.length>0,
+  ];
+  const done=checks.filter(Boolean).length;
+  const pct=Math.round(done/checks.length*100);
+  document.getElementById("prog-fill").style.width=pct+"%";
+  document.getElementById("prog-pct").textContent=pct+"%";
+  document.getElementById("fab-pct").textContent=pct+"%";
+  const tabs=["maklumat","aluan","ringkasan","projek","kewangan","kpi","timeline","pelan"];
+  checks.forEach((ok,i)=>{
+    const dot=document.getElementById("dot-"+tabs[i]);
+    if(dot)dot.classList.toggle("done",ok);
+  });
+}
+
+/* ═══════════════════════════════════════
+   SYNC HELPERS
+═══════════════════════════════════════ */
+function syncTahun(val){
+  document.querySelectorAll(".sync-tahun").forEach(el=>el.textContent=val||"—");
+  const next=val&&!isNaN(val)?String(parseInt(val)+1):"—";
+  document.querySelectorAll(".sync-tahun-next").forEach(el=>el.textContent=next);
+}
+function syncName(){
+  const name=document.getElementById("f-nama").value;
+  const pos=document.getElementById("f-jawatan").value;
+  document.getElementById("hero-name-disp").textContent=name||"Nama Ketua Jabatan";
+  document.getElementById("hero-pos-disp").textContent=(pos||"Ketua Jabatan Kejuruteraan")+" · MDPH";
+  document.getElementById("aluan-name-disp").textContent=name||"Nama Ketua Jabatan";
+  document.getElementById("aluan-pos-disp").textContent=pos||"Ketua Jabatan Kejuruteraan";
+  updateProgress();
+}
+function handleAluanImg(files){
+  if(!files[0])return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    ["hero-photo-img","aluan-photo-img2"].forEach(id=>{
+      const img=document.getElementById(id);
+      if(img){img.src=ev.target.result;img.style.display="block";}
+    });
+    const ph=document.getElementById("aluan-ph-placeholder");
+    if(ph)ph.style.display="none";
+    const pi=document.getElementById("hero-photo-inner");
+    if(pi)pi.style.display="";
+  };
+  r.readAsDataURL(files[0]);
+}
+
+/* ═══════════════════════════════════════
+   VISI MISI
+═══════════════════════════════════════ */
+function renderVisiMisi(){
+  document.getElementById("visi-disp").textContent=document.getElementById("f-visi").value;
+  const misi=document.getElementById("f-misi").value.split("\n").filter(s=>s.trim());
+  document.getElementById("misi-disp").innerHTML=misi.map(m=>`<li>${m}</li>`).join("");
+  updateProgress();
+}
+
+/* ═══════════════════════════════════════
+   KATA ALUAN
+═══════════════════════════════════════ */
+function renderAluan(){
+  document.getElementById("aluan-salut-disp").textContent=document.getElementById("f-salut").value;
+  const body=document.getElementById("f-aluan-body").value;
+  const paras=body.split(/\n\n+/).filter(s=>s.trim());
+  document.getElementById("aluan-content-disp").innerHTML=paras.map(p=>`<p class="aluan-para">${p.replace(/\n/g," ")}</p>`).join("");
+  updateProgress();
+}
+
+/* ═══════════════════════════════════════
+   STATS
+═══════════════════════════════════════ */
+function addStat(val="",lbl=""){
+  statsData.push({val,lbl});
+  renderStatsRepeater();renderStatsPreview();updateProgress();
+}
+function delStat(i){statsData.splice(i,1);renderStatsRepeater();renderStatsPreview();updateProgress();}
+function renderStatsRepeater(){
+  document.getElementById("stats-repeater").innerHTML=statsData.map((s,i)=>`
+    <div class="repeater-item">
+      <button class="del-btn" onclick="delStat(${i})">✕</button>
+      <div class="field-row col2">
+        <div class="field"><label>Nilai / Angka</label><input type="text" value="${s.val}" placeholder="cth: 47 projek" oninput="statsData[${i}].val=this.value;renderStatsPreview();updateProgress()"></div>
+        <div class="field"><label>Label</label><input type="text" value="${s.lbl}" placeholder="cth: Jumlah Projek" oninput="statsData[${i}].lbl=this.value;renderStatsPreview()"></div>
+      </div>
+    </div>`).join("");
+}
+function renderStatsPreview(){
+  const w=document.getElementById("stats-preview");
+  if(!statsData.length){w.innerHTML='<div class="empty-state">Belum ada data. Buka <strong>Panel Isi Data</strong> → tab <strong>Pencapaian</strong>.</div>';w.style.gridTemplateColumns="1fr";return}
+  w.style.gridTemplateColumns=`repeat(${Math.min(statsData.length,4)},1fr)`;
+  w.innerHTML=statsData.map(s=>`<div class="stat-prev"><div class="stat-prev-val">${s.val||"—"}</div><div class="stat-prev-lbl">${s.lbl||"Label"}</div></div>`).join("");
+  // Update hero pills
+  const find=keys=>{for(const k of keys){const s=statsData.find(x=>x.lbl.toLowerCase().includes(k));if(s)return s.val}return"—"};
+  document.getElementById("pill-projek").textContent=find(["projek","bilangan"]);
+  document.getElementById("pill-belanja").textContent=find(["belanja","perbelanj","kos","peruntukan"]);
+  document.getElementById("pill-kadar").textContent=find(["kadar","siap","penyiap"]);
+}
+
+/* ═══════════════════════════════════════
+   PROJEK
+═══════════════════════════════════════ */
+function addProjek(name="",cat="Jalan Raya",cost="",quarter="S1",status="Siap",prog=100){
+  projekData.push({name,cat,cost,quarter,status,prog});
+  renderProjekRepeater();renderProjekPreview();updateProgress();
+}
+function delProjek(i){projekData.splice(i,1);renderProjekRepeater();renderProjekPreview();updateProgress();}
+function renderProjekRepeater(){
+  document.getElementById("projek-repeater").innerHTML=projekData.map((p,i)=>`
+    <div class="repeater-item">
+      <button class="del-btn" onclick="delProjek(${i})">✕</button>
+      <div class="field"><label>Nama Projek</label><input type="text" value="${p.name}" placeholder="cth: Menaik Taraf Jalan Kampung Baru" oninput="projekData[${i}].name=this.value;renderProjekPreview()"></div>
+      <div class="field-row col2">
+        <div class="field"><label>Kategori</label><select oninput="projekData[${i}].cat=this.value;renderProjekPreview()">${catOpts.map(c=>`<option${c===p.cat?" selected":""}>${c}</option>`).join("")}</select></div>
+        <div class="field"><label>Kos (RM)</label><input type="text" value="${p.cost}" placeholder="1,200,000" oninput="projekData[${i}].cost=this.value;renderProjekPreview()"></div>
+      </div>
+      <div class="field-row col3">
+        <div class="field"><label>Suku</label><select oninput="projekData[${i}].quarter=this.value;renderProjekPreview()">${["S1","S2","S3","S4"].map(q=>`<option${q===p.quarter?" selected":""}>${q}</option>`).join("")}</select></div>
+        <div class="field"><label>Status</label><select oninput="projekData[${i}].status=this.value;renderProjekPreview()"><option${p.status==="Siap"?" selected":""}>Siap</option><option${p.status==="Dalam Pelaksanaan"?" selected":""}>Dalam Pelaksanaan</option></select></div>
+        <div class="field"><label>Kemajuan %</label><input type="number" min="0" max="100" value="${p.prog}" oninput="projekData[${i}].prog=+this.value;renderProjekPreview()"></div>
+      </div>
+    </div>`).join("");
+}
+function renderProjekPreview(){
+  const tb=document.getElementById("projek-tbody");
+  if(!projekData.length){tb.innerHTML=`<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada projek. Buka Panel → tab Projek.</td></tr>`;return}
+  tb.innerHTML=projekData.map((p,i)=>{
+    const ok=p.status==="Siap",c=ok?"#1f7a42":"#9a7320";
+    return`<tr>
+      <td style="text-align:center;opacity:.3;font-size:12px;font-family:'DM Mono',monospace">${i+1}</td>
+      <td style="font-weight:600;color:var(--text)">${p.name||"—"}</td>
+      <td style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${p.cat}</td>
+      <td style="text-align:right;font-size:13px;font-family:'DM Mono',monospace">RM ${p.cost||"—"}</td>
+      <td style="text-align:center;font-size:12px;font-family:'DM Mono',monospace;color:var(--muted)">${p.quarter}</td>
+      <td style="text-align:center"><span class="badge badge-${ok?"ok":"wip"}">${ok?"Siap":"Sedang"}</span></td>
+      <td><div style="display:flex;align-items:center;gap:9px">
+        <div style="flex:1;height:4px;border-radius:99px;background:rgba(90,70,140,.1);overflow:hidden;min-width:60px"><div style="height:100%;width:${p.prog}%;background:${c};border-radius:99px"></div></div>
+        <span style="font-size:12px;font-weight:700;color:${c};width:32px;text-align:right;font-family:'DM Mono',monospace">${p.prog}%</span>
+      </div></td>
+    </tr>`;
+  }).join("");
+}
+
+/* ═══════════════════════════════════════
+   KEWANGAN
+═══════════════════════════════════════ */
+function addKewangan(cat="",alloc="",spent=""){
+  kewanganData.push({cat,alloc,spent});
+  renderKewanganRepeater();renderKewanganPreview();updateProgress();
+}
+function delKewangan(i){kewanganData.splice(i,1);renderKewanganRepeater();renderKewanganPreview();updateProgress();}
+function renderKewanganRepeater(){
+  document.getElementById("kewangan-repeater").innerHTML=kewanganData.map((k,i)=>`
+    <div class="repeater-item">
+      <button class="del-btn" onclick="delKewangan(${i})">✕</button>
+      <div class="field"><label>Kategori</label><input type="text" value="${k.cat}" placeholder="cth: Jalan Raya" oninput="kewanganData[${i}].cat=this.value;renderKewanganPreview()"></div>
+      <div class="field-row col2">
+        <div class="field"><label>Peruntukan (RM)</label><input type="text" value="${k.alloc}" placeholder="5,000,000" oninput="kewanganData[${i}].alloc=this.value;renderKewanganPreview()"></div>
+        <div class="field"><label>Perbelanjaan (RM)</label><input type="text" value="${k.spent}" placeholder="4,500,000" oninput="kewanganData[${i}].spent=this.value;renderKewanganPreview()"></div>
+      </div>
+    </div>`).join("");
+}
+function renderKewanganPreview(){
+  const tb=document.getElementById("kewangan-tbody"),tf=document.getElementById("kewangan-tfoot");
+  if(!kewanganData.length){tb.innerHTML=`<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada data. Buka Panel → tab Kewangan.</td></tr>`;tf.innerHTML="";return}
+  let tA=0,tS=0;
+  tb.innerHTML=kewanganData.map((k,i)=>{
+    const a=parseFloat(k.alloc.replace(/,/g,""))||0,s=parseFloat(k.spent.replace(/,/g,""))||0,baki=a-s,pct=a>0?Math.round(s/a*100):0;
+    tA+=a;tS+=s;const col=PALETTE[i%PALETTE.length];
+    return`<tr>
+      <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col};margin-right:10px;vertical-align:middle"></span>${k.cat||"—"}</td>
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-size:13px">RM ${a.toLocaleString()}</td>
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-size:13px">RM ${s.toLocaleString()}</td>
+      <td style="text-align:right;font-family:'DM Mono',monospace;font-size:13px">RM ${baki.toLocaleString()}</td>
+      <td style="text-align:center;font-weight:700;font-family:'DM Mono',monospace;font-size:12px;color:${col}">${pct}%</td>
+      <td><div style="display:flex;align-items:center;gap:7px">
+        <div style="flex:1;height:4px;border-radius:99px;background:rgba(90,70,140,.08);overflow:hidden;min-width:60px"><div style="height:100%;width:${pct}%;background:${col};border-radius:99px"></div></div>
+        <span style="font-size:11px;font-weight:700;color:${col};font-family:'DM Mono',monospace">${pct}%</span>
+      </div></td>
+    </tr>`;
+  }).join("");
+  const tP=tA>0?Math.round(tS/tA*100):0;
+  tf.innerHTML=`<tr><td style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600">JUMLAH</td><td style="text-align:right;font-family:'DM Mono',monospace">RM ${tA.toLocaleString()}</td><td style="text-align:right;font-family:'DM Mono',monospace">RM ${tS.toLocaleString()}</td><td style="text-align:right;font-family:'DM Mono',monospace">RM ${(tA-tS).toLocaleString()}</td><td colspan="2" style="text-align:right;color:var(--gold);font-family:'DM Mono',monospace">${tP}% Digunakan</td></tr>`;
+}
+
+/* ═══════════════════════════════════════
+   KPI
+═══════════════════════════════════════ */
+function addKPI(label="",target=80,actual=0,color="#9a7320"){
+  kpiData.push({label,target,actual,color});
+  renderKPIRepeater();renderKPIPreview();updateProgress();
+}
+function delKPI(i){kpiData.splice(i,1);renderKPIRepeater();renderKPIPreview();updateProgress();}
+function renderKPIRepeater(){
+  document.getElementById("kpi-repeater").innerHTML=kpiData.map((k,i)=>`
+    <div class="repeater-item">
+      <button class="del-btn" onclick="delKPI(${i})">✕</button>
+      <div class="field"><label>Label KPI</label><input type="text" value="${k.label}" placeholder="cth: Kadar Penyiapan Projek" oninput="kpiData[${i}].label=this.value;renderKPIPreview()"></div>
+      <div class="field-row col3">
+        <div class="field"><label>Sasaran (%)</label><input type="number" min="0" max="100" value="${k.target}" oninput="kpiData[${i}].target=+this.value;renderKPIPreview()"></div>
+        <div class="field"><label>Capai (%)</label><input type="number" min="0" max="100" value="${k.actual}" oninput="kpiData[${i}].actual=+this.value;renderKPIPreview()"></div>
+        <div class="field"><label>Warna</label><div class="color-row"><input type="color" value="${k.color}" oninput="kpiData[${i}].color=this.value;renderKPIPreview()"><span style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace">${k.actual>=k.target?"✓ Melebihi":"Dibawah"}</span></div></div>
+      </div>
+    </div>`).join("");
+}
+function renderKPIPreview(){
+  const l=document.getElementById("kpi-list");
+  if(!kpiData.length){l.innerHTML='<div class="empty-state">Belum ada KPI. Buka Panel → tab KPI.</div>';return}
+  l.innerHTML=kpiData.map(k=>{
+    const ok=k.actual>=k.target,col=k.color||(ok?"#1f7a42":"#9a7320"),diff=k.actual-k.target;
+    return`<div class="kpi-prev-item">
+      <div class="kpi-prev-top"><span class="kpi-prev-label">${k.label||"KPI"}</span><span class="kpi-prev-val" style="color:${col}">${k.actual}%</span></div>
+      <div class="kpi-track">
+        <div class="kpi-fill" style="width:${Math.min(k.actual,100)}%;background:${col}"></div>
+        <div class="kpi-target-line" style="left:${Math.min(k.target,100)}%"></div>
+      </div>
+      <div class="kpi-meta"><span>Sasaran: ${k.target}%</span><span style="color:${col};font-weight:500">${ok?"Melebihi Sasaran (+"+diff+"%)":"Di Bawah Sasaran ("+diff+"%)"}</span></div>
+    </div>`;
+  }).join("");
+}
+
+/* ═══════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════ */
+function addTL(q="",title="",desc=""){
+  tlData.push({q,title,desc});
+  renderTLRepeater();renderTLPreview();updateProgress();
+}
+function delTL(i){tlData.splice(i,1);renderTLRepeater();renderTLPreview();updateProgress();}
+function renderTLRepeater(){
+  document.getElementById("tl-repeater").innerHTML=tlData.map((t,i)=>`
+    <div class="repeater-item">
+      <button class="del-btn" onclick="delTL(${i})">✕</button>
+      <div class="field-row col2">
+        <div class="field"><label>Suku Tahun</label><input type="text" value="${t.q}" placeholder="cth: S1 (Jan-Mac)" oninput="tlData[${i}].q=this.value;renderTLPreview()"></div>
+        <div class="field"><label>Fasa / Tajuk</label><input type="text" value="${t.title}" placeholder="cth: Fasa Perancangan" oninput="tlData[${i}].title=this.value;renderTLPreview()"></div>
+      </div>
+      <div class="field"><label>Penerangan Pencapaian</label><textarea rows="3" oninput="tlData[${i}].desc=this.value;renderTLPreview()">${t.desc}</textarea></div>
+    </div>`).join("");
+}
+function renderTLPreview(){
+  const tb=document.getElementById("tl-tbody");
+  if(!tlData.length){tb.innerHTML=`<tr><td colspan="3" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada data. Buka Panel → tab Suku Tahun.</td></tr>`;return}
+  tb.innerHTML=tlData.map((t,i)=>`
+    <tr>
+      <td><span class="badge badge-ok" style="font-size:10px;letter-spacing:.06em">${t.q||"—"}</span></td>
+      <td style="font-weight:600;color:${PALETTE[i%PALETTE.length]}">${t.title||"—"}</td>
+      <td style="font-size:13.5px;line-height:1.8;color:var(--text-3);font-weight:300">${t.desc||"—"}</td>
+    </tr>`).join("");
+}
+
+/* ═══════════════════════════════════════
+   PELAN
+═══════════════════════════════════════ */
+function addPelan(inisiatif="",peruntukan="",tempoh="",sasaran=""){
+  pelanData.push({inisiatif,peruntukan,tempoh,sasaran});
+  renderPelanRepeater();renderPelan();updateProgress();
+}
+function delPelan(i){pelanData.splice(i,1);renderPelanRepeater();renderPelan();updateProgress();}
+function renderPelanRepeater(){
+  document.getElementById("pelan-repeater").innerHTML=pelanData.map((p,i)=>`
+    <div class="repeater-item">
+      <button class="del-btn" onclick="delPelan(${i})">✕</button>
+      <div class="field"><label>Nama Inisiatif</label><input type="text" value="${p.inisiatif}" placeholder="cth: Menaik Taraf Jalan Utama" oninput="pelanData[${i}].inisiatif=this.value;renderPelan()"></div>
+      <div class="field-row col3">
+        <div class="field"><label>Peruntukan (RM)</label><input type="text" value="${p.peruntukan}" placeholder="12,000,000" oninput="pelanData[${i}].peruntukan=this.value;renderPelan()"></div>
+        <div class="field"><label>Tempoh</label><input type="text" value="${p.tempoh}" placeholder="Jan–Jun 2026" oninput="pelanData[${i}].tempoh=this.value;renderPelan()"></div>
+        <div class="field"><label>Sasaran</label><input type="text" value="${p.sasaran}" placeholder="Siap 100%" oninput="pelanData[${i}].sasaran=this.value;renderPelan()"></div>
+      </div>
+    </div>`).join("");
+}
+function renderPelan(){
+  document.getElementById("pelan-total-disp").textContent=document.getElementById("f-pelan-total").value||"—";
+  const tb=document.getElementById("pelan-tbody");
+  if(!pelanData.length){tb.innerHTML=`<tr><td colspan="4" style="text-align:center;padding:40px;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px">Belum ada data. Buka Panel → tab Pelan.</td></tr>`;return}
+  tb.innerHTML=pelanData.map(p=>`
+    <tr>
+      <td style="padding:12px 16px;color:var(--text-2)">${p.inisiatif||"—"}</td>
+      <td style="padding:12px 16px;text-align:right;color:var(--gold-2);font-weight:700;font-family:'DM Mono',monospace;font-size:13px">RM ${p.peruntukan||"—"}</td>
+      <td style="padding:12px 16px;text-align:center;font-size:12px;font-family:'DM Mono',monospace;color:var(--muted)">${p.tempoh||"—"}</td>
+      <td style="padding:12px 16px;font-size:13px;color:var(--text-3)">${p.sasaran||"—"}</td>
+    </tr>`).join("");
+}
+
+/* ═══════════════════════════════════════
+   IMAGES (drag-drop in report)
+═══════════════════════════════════════ */
+const iz=document.querySelector(".img-zone");
+if(iz){
+  iz.addEventListener("dragover",e=>{e.preventDefault();iz.style.borderColor="var(--gold)"});
+  iz.addEventListener("dragleave",()=>iz.style.borderColor="");
+  iz.addEventListener("drop",e=>{e.preventDefault();iz.style.borderColor="";handleImgs(e.dataTransfer.files)});
+}
+function handleImgs(files){
+  Array.from(files).forEach(f=>{
+    if(!f.type.startsWith("image/"))return;
+    const r=new FileReader();
+    r.onload=ev=>{imgData.push({src:ev.target.result,tajuk:f.name.replace(/\.[^.]+$/,""),caption:""});renderImgGrid()};
+    r.readAsDataURL(f);
+  });
+  document.getElementById("img-input").value="";
+}
+function delImg(i){imgData.splice(i,1);renderImgGrid();}
+function escHtml(s){return(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function syncImgPrint(i){
+  const el=document.getElementById("img-print-"+i);if(!el)return;
+  const im=imgData[i];
+  el.innerHTML='<strong>'+escHtml(im.tajuk||"Gambar "+(i+1))+'</strong><span>'+escHtml(im.caption)+'</span>';
+}
+function renderImgGrid(){
+  const g=document.getElementById("img-grid");
+  if(!imgData.length){
+    g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--muted);font-size:13px;font-family:DM Mono,monospace;letter-spacing:.04em">Belum ada gambar. Klik zon muat naik di atas.</div>';
+    return;
+  }
+  g.innerHTML=imgData.map((im,i)=>{
+    const t=escHtml(im.tajuk);const c=escHtml(im.caption);
+    return `<div class="img-item">
+      <div class="img-thumb">
+        <div class="img-num">${i+1}</div>
+        <button class="img-del no-print" onclick="delImg(${i})" title="Buang gambar">&#215;</button>
+        <img src="${im.src}" alt="${t||'Gambar '+(i+1)}">
+      </div>
+      <div class="img-meta-edit no-print">
+        <div>
+          <span class="img-lbl">Tajuk Projek</span>
+          <input class="img-tajuk-input" type="text" value="${t}" placeholder="cth: Projek Jalan Kampung Baru" oninput="imgData[${i}].tajuk=this.value;syncImgPrint(${i})">
+        </div>
+        <div>
+          <span class="img-lbl">Keterangan</span>
+          <input class="img-caption-input" type="text" value="${c}" placeholder="cth: Kerja turap siap Ogos 2025" oninput="imgData[${i}].caption=this.value;syncImgPrint(${i})">
+        </div>
+      </div>
+      <div class="img-print-meta" id="img-print-${i}">
+        <strong>${t||'Gambar '+(i+1)}</strong>
+        <span>${c}</span>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ═══════════════════════════════════════
+   SAMPLE DATA FILL
+═══════════════════════════════════════ */
+function fillSampleAll(){
+  // Maklumat
+  document.getElementById("f-tahun").value="2025"; syncTahun("2025");
+  document.getElementById("f-nama").value="Mohd. Azizudin Bin Ismail"; 
+  document.getElementById("f-jawatan").value="Ketua Jabatan Kejuruteraan"; syncName();
+
+  // Aluan
+  document.getElementById("f-salut").value="Assalamualaikum Warahmatullahi Wabarakatuh dan Salam Sejahtera,";
+  document.getElementById("f-aluan-body").value=`Alhamdulillah, Jabatan Kejuruteraan Majlis Daerah Pengkalan Hulu telah berjaya melaksanakan pelbagai projek dan tanggungjawab sepanjang tahun 2025 dengan baik, terancang serta berkesan.
+
+Sepanjang tahun ini, jabatan memberi tumpuan kepada pembangunan dan penyelenggaraan infrastruktur meliputi jalan raya, sistem perparitan, lampu jalan serta kemudahan awam bagi memastikan kesejahteraan penduduk.
+
+Komitmen serta kerjasama erat daripada semua pihak telah membolehkan setiap perancangan dilaksanakan dengan jayanya walaupun berdepan dengan pelbagai cabaran.
+
+Saya ingin merakamkan setinggi-tinggi penghargaan kepada seluruh warga jabatan atas dedikasi dan komitmen yang ditunjukkan sepanjang tahun ini.`;
+  renderAluan();
+
+  // Stats
+  statsData=[];
+  [["47","Jumlah Projek"],["RM 28.5J","Jumlah Perbelanjaan"],["89%","Kadar Siap"],["124","Aduan Diselesaikan"]].forEach(([v,l])=>statsData.push({val:v,lbl:l}));
+  renderStatsRepeater();renderStatsPreview();
+
+  // Projek
+  projekData=[];
+  [
+    ["Menaik Taraf Jalan Kg. Baru","Jalan Raya","1,250,000","S1","Siap",100],
+    ["Pembinaan Longkang Beton Taman Damai","Saliran","890,000","S2","Siap",100],
+    ["Lampu Jalan Solar Fasa 2","Kemudahan Awam","560,000","S3","Siap",100],
+    ["Naik Taraf Balai Raya Kampung Sungai","Bangunan","340,000","S2","Siap",100],
+    ["Turap Jalan Pengkalan–Klian Intan","Jalan Raya","2,100,000","S4","Dalam Pelaksanaan",72],
+    ["Pembinaan Taman Rekreasi Pekan","Kemudahan Awam","780,000","S4","Dalam Pelaksanaan",55],
+  ].forEach(r=>projekData.push({name:r[0],cat:r[1],cost:r[2],quarter:r[3],status:r[4],prog:r[5]}));
+  renderProjekRepeater();renderProjekPreview();
+
+  // Kewangan
+  kewanganData=[];
+  [["Jalan Raya","12,500,000","11,200,000"],["Saliran","4,200,000","3,980,000"],["Bangunan","2,800,000","2,650,000"],["Kemudahan Awam","5,000,000","4,200,000"],["Penyelenggaraan","3,000,000","2,900,000"]].forEach(r=>kewanganData.push({cat:r[0],alloc:r[1],spent:r[2]}));
+  renderKewanganRepeater();renderKewanganPreview();
+
+  // KPI
+  kpiData=[];
+  [["Kadar Penyiapan Projek",90,89,"#9a7320"],["Penyelesaian Aduan Orang Ramai",95,97,"#1f7a42"],["Penggunaan Peruntukan",85,87,"#3a6080"],["Kepuasan Pelanggan",80,76,"#b8902e"]].forEach(r=>kpiData.push({label:r[0],target:r[1],actual:r[2],color:r[3]}));
+  renderKPIRepeater();renderKPIPreview();
+
+  // Timeline
+  tlData=[];
+  [
+    ["S1 (Jan–Mac)","Fasa Perancangan","Penyediaan dokumen tender, lukisan teknikal dan jadual pelaksanaan projek. Sebanyak 12 projek telah diluluskan peruntukan."],
+    ["S2 (Apr–Jun)","Fasa Pelaksanaan Awal","Kerja-kerja jalan dan saliran bermula. 18 projek dalam fasa pembinaan aktif. Mesyuarat tapak mingguan dilaksanakan."],
+    ["S3 (Jul–Sep)","Fasa Pembinaan Utama","Kemuncak aktiviti pembinaan. 31 projek siap sepenuhnya. Kerja penyelenggaraan lampu jalan solar diselesaikan."],
+    ["S4 (Okt–Dis)","Fasa Penyiapan & Audit","Penyiapan 6 projek berbaki, audit teknikal dan penyerahan laporan siap kepada pihak pengurusan."],
+  ].forEach(r=>tlData.push({q:r[0],title:r[1],desc:r[2]}));
+  renderTLRepeater();renderTLPreview();
+
+  // Pelan
+  document.getElementById("f-pelan-total").value="RM 32 Juta";
+  pelanData=[];
+  [
+    ["Naik Taraf Jalan Utama Pengkalan Hulu","15,000,000","Jan–Sep 2026","Jalan siap 100% & bertar"],
+    ["Pembangunan Taman Bandar Baru","5,500,000","Mac–Nov 2026","Taman lengkap beroperasi"],
+    ["Sistem Perparitan Bersepadu","7,000,000","Feb–Dis 2026","Kawasan banjir berkurang 80%"],
+    ["Lampu Jalan Solar Fasa 3","4,500,000","Jun–Dis 2026","500 unit tiang baru"],
+  ].forEach(r=>pelanData.push({inisiatif:r[0],peruntukan:r[1],tempoh:r[2],sasaran:r[3]}));
+  renderPelanRepeater();renderPelan();
+
+  updateProgress();
+  toast("✓ Contoh data telah diisi!");
+}
+
+/* ═══════════════════════════════════════
+   INIT
+═══════════════════════════════════════ */
+syncTahun(document.getElementById("f-tahun").value);
+syncName();
+renderVisiMisi();
+renderAluan();
+renderStatsPreview();
+renderProjekPreview();
+renderKewanganPreview();
+renderKPIPreview();
+renderTLPreview();
+renderPelan();
+updateProgress();
+</script>
+</body>
+</html>
