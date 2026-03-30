@@ -475,7 +475,8 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(74,40,128,.15);font-weight:
   }
 
   .wrap{padding:0;max-width:100%}
-  section{margin-bottom:28px;page-break-inside:avoid}
+  section{margin-bottom:28px;page-break-inside:avoid;padding-top:24px !important;}
+  section:first-child{padding-top:0 !important;}
 
   .hero{
     min-height:auto;padding:32px 28px 60px;
@@ -489,9 +490,11 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(74,40,128,.15);font-weight:
   .hero-stats-strip{background:#ffffff !important}
   .hero-stat-cell{background:#ffffff !important}
 
-  /* Section headers */
-  .sh-num{background:rgba(74,40,128,0.1) !important;color:#4a2880 !important;border-color:rgba(74,40,128,0.28) !important}
-  .sh-body h2{color:#1e1a2e !important}
+  .sh{margin-bottom:40px !important;padding-bottom:14px !important;}
+  .card,.tbl-wrap,.vm-grid,.obj-grid,.img-grid,.stats-preview,.kpi-prev-item,.aluan-poster{margin-top:16px !important;}
+  .sh-body h2{color:#1e1a2e !important;font-size:20px !important;}
+  .sh-body p{font-size:11px !important;margin-top:4px !important;}
+  .sh-num{background:rgba(74,40,128,0.1) !important;color:#4a2880 !important;border-color:rgba(74,40,128,0.28) !important;font-size:10px !important;padding:5px 10px !important;}
 
   /* Cards keep white background */
   .card{background:#ffffff !important;border-color:rgba(90,70,140,0.12) !important}
