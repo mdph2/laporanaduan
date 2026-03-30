@@ -499,7 +499,12 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(74,40,128,.15);font-weight:
   /* Cards keep white background */
   .card{background:#ffffff !important;border-color:rgba(90,70,140,0.12) !important}
 
-  /* Table colors */
+  /* Table fit in print */
+  table.tbl{font-size:10px !important;min-width:unset !important;width:100% !important;}
+  table.tbl th{font-size:8px !important;padding:8px 10px !important;white-space:nowrap !important;}
+  table.tbl td{font-size:10px !important;padding:8px 10px !important;white-space:nowrap !important;}
+  table.tbl tfoot td{font-size:10px !important;padding:8px 10px !important;white-space:nowrap !important;}
+  .tbl-wrap{overflow:visible !important;}
   table.tbl th{background:#2a1a50 !important;color:#c0a8f0 !important;border-bottom:2px solid #4a2880 !important}
   table.tbl td{background:#ffffff !important;color:#3d3555 !important}
   table.tbl tr:nth-child(even) td{background:rgba(90,70,140,0.05) !important}
