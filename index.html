@@ -500,11 +500,15 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(74,40,128,.15);font-weight:
   .card{background:#ffffff !important;border-color:rgba(90,70,140,0.12) !important}
 
   /* Table fit in print */
-  table.tbl{font-size:10px !important;min-width:unset !important;width:100% !important;}
-  table.tbl th{font-size:8px !important;padding:8px 10px !important;white-space:nowrap !important;}
-  table.tbl td{font-size:10px !important;padding:8px 10px !important;white-space:nowrap !important;}
-  table.tbl tfoot td{font-size:10px !important;padding:8px 10px !important;white-space:nowrap !important;}
+  table.tbl{font-size:9px !important;min-width:unset !important;width:100% !important;table-layout:fixed !important;}
+  table.tbl th{font-size:8px !important;padding:6px 8px !important;white-space:normal !important;word-break:break-word !important;}
+  table.tbl td{font-size:9px !important;padding:6px 8px !important;white-space:normal !important;word-break:break-word !important;overflow-wrap:anywhere !important;}
+  table.tbl tfoot td{font-size:9px !important;padding:6px 8px !important;white-space:normal !important;word-break:break-word !important;}
   .tbl-wrap{overflow:visible !important;}
+  .print-only-pct{display:inline !important;}
+  /* Hide mini bar charts inside td, keep % text */
+  table.tbl td > div[style*="display:flex"]{display:none !important;}
+  table.tbl td > div[style*="flex:1"]{display:none !important;}
   table.tbl th{background:#2a1a50 !important;color:#c0a8f0 !important;border-bottom:2px solid #4a2880 !important}
   table.tbl td{background:#ffffff !important;color:#3d3555 !important}
   table.tbl tr:nth-child(even) td{background:rgba(90,70,140,0.05) !important}
@@ -599,7 +603,12 @@ table.tbl tfoot td{padding:13px 16px;background:rgba(74,40,128,.15);font-weight:
     gap:4px !important;
   }
 
-  /* Image print meta */
+  /* Laporan Bergambar — 3 per row in print */
+  .img-grid{display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:12px !important;}
+  .img-item{page-break-inside:avoid !important;border:1px solid rgba(90,70,140,0.2) !important;border-radius:8px !important;overflow:hidden !important;}
+  .img-thumb{aspect-ratio:4/3 !important;}
+  .img-thumb img{width:100% !important;height:100% !important;object-fit:cover !important;display:block !important;}
+  .img-num{display:none !important;}
   .img-meta-edit{display:none!important}
   .img-print-meta{display:block!important;background:#ffffff !important}
   .img-del,.img-zone{display:none!important}
@@ -1346,7 +1355,7 @@ function renderProjekPreview(){
       <td><div style="display:flex;align-items:center;gap:9px">
         <div style="flex:1;height:4px;border-radius:99px;background:rgba(90,70,140,.1);overflow:hidden;min-width:60px"><div style="height:100%;width:${p.prog}%;background:${c};border-radius:99px"></div></div>
         <span style="font-size:12px;font-weight:700;color:${c};width:32px;text-align:right;font-family:'DM Mono',monospace">${p.prog}%</span>
-      </div></td>
+      </div><span class="print-only-pct" style="display:none;font-size:9px;font-weight:700;color:${c};font-family:'DM Mono',monospace">${p.prog}%</span></td>
     </tr>`;
   }).join("");
   updateHeroPills();
